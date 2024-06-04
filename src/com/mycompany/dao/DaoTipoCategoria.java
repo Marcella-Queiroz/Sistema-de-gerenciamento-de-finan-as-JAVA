@@ -1,6 +1,7 @@
 package com.mycompany.dao;
 
 import com.mycompany.utilidades.BancoDeDadosMySql;
+import java.sql.ResultSet;
 
 public class DaoTipoCategoria extends BancoDeDadosMySql{
     private String sql;
@@ -42,6 +43,19 @@ public class DaoTipoCategoria extends BancoDeDadosMySql{
         }
         
         return id;
+    }
+    public ResultSet listarTodos(){
+        try{
+            sql = "SELECT ID, NOME, FROM TIPO_CATEGORIA";
+
+            setStatement(getConexao().prepareStatement(sql));
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return getResultado();
     }
 }
    

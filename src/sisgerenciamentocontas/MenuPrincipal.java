@@ -5,7 +5,10 @@
 package sisgerenciamentocontas;
 
 import com.mycompany.despesas.CadDespesas;
+import com.mycompany.metas.CadMetas;
 import com.mycompany.receitas.CadReceitas;
+import com.mycompany.tipoCategoria.CadTipoCategoria;
+import com.mycompany.utilidades.BancoDeDadosMySql;
 import com.mycompany.utilidades.Formularios;
 import javax.swing.JOptionPane;
 
@@ -20,6 +23,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        
+        if(!BancoDeDadosMySql.conectar()){
+            JOptionPane.showMessageDialog(null, "Não foi possível se conectar ao banco de dados. O sistema será finalizado.");
+            System.exit(0);
+        }
     }
 
     /**
@@ -124,6 +132,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     Formularios.cadDespesas = new CadDespesas();
 
                 Formularios.cadDespesas.setVisible(true);
+                
+                break;
+            case 3:
+                if (Formularios.cadMetas == null)
+                    Formularios.cadMetas = new CadMetas();
+
+                Formularios.cadMetas.setVisible(true);
+                
+                break;
+            case 4:
+                if (Formularios.cadTipoCategoria == null)
+                    Formularios.cadTipoCategoria = new CadTipoCategoria();
+
+                Formularios.cadTipoCategoria.setVisible(true);
                 
                 break;
         }

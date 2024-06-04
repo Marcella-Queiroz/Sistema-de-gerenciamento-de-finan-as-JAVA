@@ -4,6 +4,9 @@
  */
 package com.mycompany.tipoCategoria;
 
+import com.mycompany.dao.DaoTipoCategoria;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author marcella.1963
@@ -15,8 +18,28 @@ public class CadTipoCategoria extends javax.swing.JFrame {
      */
     public CadTipoCategoria() {
         initComponents();
+        
+        DaoTipoCategoria daoTipoCategoria = new DaoTipoCategoria();
+        jtfTextFieldID.setText(String.valueOf(daoTipoCategoria.buscarProximoId()));    
+    
+        jtfTextFieldID.setEnabled(false);
     }
 
+    private void inserir(){
+        DaoTipoCategoria daoTipoCategoria = new DaoTipoCategoria();
+        
+        String nomeTipoCategoria = jtfTipoCategoria.getText();
+        
+        if(daoTipoCategoria.inserir(nomeTipoCategoria)){
+            JOptionPane.showMessageDialog(null, "Novo tipo de categoria cadastrado com sucesso.");
+        
+            jtfTextFieldID.setText(String.valueOf(daoTipoCategoria.buscarProximoId()));
+            jtfTipoCategoria.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar o tipo da categoria.");
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,13 +51,13 @@ public class CadTipoCategoria extends javax.swing.JFrame {
 
         jtfLabelID = new javax.swing.JLabel();
         jtfLabelDespesa = new javax.swing.JLabel();
-        jtfTextFieldDespesas = new javax.swing.JTextField();
+        jtfTipoCategoria = new javax.swing.JTextField();
         jtfTextFieldID = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jtfButtonSalvar = new javax.swing.JButton();
         jtfButtonExcluir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jtfLabelID.setText("ID");
 
@@ -64,7 +87,7 @@ public class CadTipoCategoria extends javax.swing.JFrame {
                     .addComponent(jtfLabelID, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfLabelDespesa)
-                    .addComponent(jtfTextFieldDespesas, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfTipoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -79,7 +102,7 @@ public class CadTipoCategoria extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfLabelDespesa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfTextFieldDespesas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfTipoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfButtonSalvar)
@@ -91,7 +114,7 @@ public class CadTipoCategoria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfButtonSalvarActionPerformed
-        // TODO add your handling code here:
+        inserir();
     }//GEN-LAST:event_jtfButtonSalvarActionPerformed
 
     /**
@@ -135,7 +158,7 @@ public class CadTipoCategoria extends javax.swing.JFrame {
     private javax.swing.JButton jtfButtonSalvar;
     private javax.swing.JLabel jtfLabelDespesa;
     private javax.swing.JLabel jtfLabelID;
-    private javax.swing.JTextField jtfTextFieldDespesas;
     private javax.swing.JTextField jtfTextFieldID;
+    private javax.swing.JTextField jtfTipoCategoria;
     // End of variables declaration//GEN-END:variables
 }

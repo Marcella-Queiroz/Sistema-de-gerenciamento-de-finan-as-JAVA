@@ -10,4 +10,12 @@ public class Formularios {
     //Despesas
     public static JFrame cadDespesas;
     public static JFrame listDespesas;
+    
+    //Metas
+    public static JFrame cadMetas;
+    public static JFrame listMetas;
+    
+    //Tipo categoria
+    public static JFrame cadTipoCategoria;
+    public static JFrame listTipoCategoria;
 }

@@ -11,6 +11,7 @@ import com.mycompany.tipoCategoria.CadTipoCategoria;
 import com.mycompany.utilidades.BancoDeDadosMySql;
 import com.mycompany.utilidades.Formularios;
 import javax.swing.JOptionPane;
+import com.mycompany.tipoCategoria.ListTipoCategoria;
 
 /**
  *
@@ -66,7 +67,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxListar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Listar", "Receitas", "Despesas", " " }));
+        jComboBoxListar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Listar", "Receitas", "Despesas", "Tipo Categoria" }));
+        jComboBoxListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxListarActionPerformed(evt);
+            }
+        });
 
         jComboBoxDarBaixa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dar Baixa", "Despesas" }));
         jComboBoxDarBaixa.addActionListener(new java.awt.event.ActionListener() {
@@ -148,9 +154,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 Formularios.cadTipoCategoria.setVisible(true);
                 
                 break;
+            
         }
     }//GEN-LAST:event_jComboBoxCadastrarActionPerformed
 
+    private void jComboBoxListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListarActionPerformed
+        switch (jComboBoxListar.getSelectedIndex()) {
+            case 3:
+                if (Formularios.listTipoCategoria == null)
+                    Formularios.listTipoCategoria = new ListTipoCategoria();
+
+                Formularios.listTipoCategoria.setVisible(true);
+                
+                break;
+        }
+    }//GEN-LAST:event_jComboBoxListarActionPerformed
+    
     /**
      * @param args the command line arguments
      */

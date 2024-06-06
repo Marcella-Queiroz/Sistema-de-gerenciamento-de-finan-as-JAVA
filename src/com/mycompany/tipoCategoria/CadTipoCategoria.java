@@ -5,7 +5,13 @@
 package com.mycompany.tipoCategoria;
 
 import com.mycompany.dao.DaoTipoCategoria;
+import com.mycompany.modelo.ModTipoCategoria;
+import com.mycompany.utilidades.Constantes;
+import com.mycompany.utilidades.DadosTemporarios;
+import com.mycompany.utilidades.Formularios;
+import com.mycompany.dao.DaoTipoCategoria;
 import javax.swing.JOptionPane;
+import jdk.dynalink.linker.support.Guards;
 
 /**
  *
@@ -19,12 +25,42 @@ public class CadTipoCategoria extends javax.swing.JFrame {
     public CadTipoCategoria() {
         initComponents();
         
+        if(!existeDadosTemporarios()){
+            DaoTipoCategoria daoTipoCategoria = new DaoTipoCategoria();
+
+            int id = daoTipoCategoria.buscarProximoId();
+            if(id>=0)
+               jtfTextFieldID.setText(String.valueOf(id));
+            
+            btnButtonSalvar.setText(Constantes.BTN_SALVAR_TEXT);
+            btnButtonExcluir.setVisible(false);
+            jtfTextFieldID.setText(String.valueOf(daoTipoCategoria.buscarProximoId()));
+        }else{
+            btnButtonSalvar.setText(Constantes.BTN_ALTERAR_TEXT);
+            btnButtonExcluir.setVisible(true);
+        }
+        
         DaoTipoCategoria daoTipoCategoria = new DaoTipoCategoria();
-        jtfTextFieldID.setText(String.valueOf(daoTipoCategoria.buscarProximoId()));    
-    
+        
         jtfTextFieldID.setEnabled(false);
+        
     }
 
+    public Boolean existeDadosTemporarios(){
+        if (DadosTemporarios.tempObject instanceof ModTipoCategoria){
+            int id =((ModTipoCategoria) DadosTemporarios.tempObject).getId();
+            String nome = ((ModTipoCategoria) DadosTemporarios.tempObject).getNome();
+            
+            jtfTextFieldID.setText(String.valueOf(id));
+            jtfTipoCategoria.setText(nome);
+            
+            DadosTemporarios.tempObject = null;
+           
+            return true;
+        }else
+            return false;
+        }
+    
     private void inserir(){
         DaoTipoCategoria daoTipoCategoria = new DaoTipoCategoria();
         
@@ -38,6 +74,23 @@ public class CadTipoCategoria extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar o tipo da categoria.");
         }
+    }
+    
+    private void alterar(){
+        DaoTipoCategoria daoTipoCategoria = new DaoTipoCategoria();
+        
+        if (daoTipoCategoria.alterar(Integer.parseInt(jtfTextFieldID.getText()), jtfTipoCategoria.getText())){
+            JOptionPane.showMessageDialog(null, "Categoria alterada com sucesso!");
+            
+            jtfTextFieldID.setText("");
+            jtfTipoCategoria.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possível alterar a categoria!");
+        }
+        
+        ((ListTipoCategoria) Formularios.listTipoCategoria).listarTodos();
+        
+        dispose();
     }
     
     /**
@@ -54,23 +107,28 @@ public class CadTipoCategoria extends javax.swing.JFrame {
         jtfTipoCategoria = new javax.swing.JTextField();
         jtfTextFieldID = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        jtfButtonSalvar = new javax.swing.JButton();
-        jtfButtonExcluir = new javax.swing.JButton();
+        btnButtonSalvar = new javax.swing.JButton();
+        btnButtonExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jtfLabelID.setText("ID");
 
         jtfLabelDespesa.setText("Tipo de Categoria");
 
-        jtfButtonSalvar.setText("Salvar");
-        jtfButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
+        btnButtonSalvar.setText("Salvar");
+        btnButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfButtonSalvarActionPerformed(evt);
+                btnButtonSalvarActionPerformed(evt);
             }
         });
 
-        jtfButtonExcluir.setText("Excluir");
+        btnButtonExcluir.setText("Excluir");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,9 +139,9 @@ public class CadTipoCategoria extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jtfButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jtfButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jtfLabelID, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfLabelDespesa)
@@ -105,17 +163,33 @@ public class CadTipoCategoria extends javax.swing.JFrame {
                 .addComponent(jtfTipoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfButtonSalvar)
-                    .addComponent(jtfButtonExcluir))
+                    .addComponent(btnButtonSalvar)
+                    .addComponent(btnButtonExcluir))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfButtonSalvarActionPerformed
-        inserir();
-    }//GEN-LAST:event_jtfButtonSalvarActionPerformed
+    private void btnButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnButtonSalvarActionPerformed
+        DaoTipoCategoria daoTipoCategoria = new DaoTipoCategoria();
+        
+        if(btnButtonSalvar.getText() == Constantes.BTN_SALVAR_TEXT){
+            inserir();
+            
+            jtfTextFieldID.setText(String.valueOf(daoTipoCategoria.buscarProximoId()));
+            jtfTipoCategoria.setText("");
+            
+        }else if (btnButtonSalvar.getText() == Constantes.BTN_ALTERAR_TEXT){
+             alterar();
+            ((ListTipoCategoria) Formularios.listTipoCategoria).listarTodos();
+            dispose();
+        }
+    }//GEN-LAST:event_btnButtonSalvarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        Formularios.cadTipoCategoria = null;
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -153,9 +227,9 @@ public class CadTipoCategoria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnButtonExcluir;
+    private javax.swing.JButton btnButtonSalvar;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton jtfButtonExcluir;
-    private javax.swing.JButton jtfButtonSalvar;
     private javax.swing.JLabel jtfLabelDespesa;
     private javax.swing.JLabel jtfLabelID;
     private javax.swing.JTextField jtfTextFieldID;

@@ -46,7 +46,7 @@ public class DaoTipoCategoria extends BancoDeDadosMySql{
     }
     public ResultSet listarTodos(){
         try{
-            sql = "SELECT ID, NOME, FROM TIPO_CATEGORIA";
+            sql = "SELECT ID, NOME FROM TIPO_CATEGORIA";
 
             setStatement(getConexao().prepareStatement(sql));
             
@@ -57,5 +57,54 @@ public class DaoTipoCategoria extends BancoDeDadosMySql{
         
         return getResultado();
     }
+    
+         public ResultSet listarPorId(int id){
+            try{
+                sql =  "SELECT ID, NOME,FROM TIPO_CATEGORIA WHERE NOME LIKE ?";
+               
+                setStatement(getConexao().prepareStatement(sql));
+            
+                getStatement().setInt(1, id);
+                
+                setResultado(getStatement().executeQuery());
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+            return getResultado();
+         }
+         
+         public ResultSet listarPorNome (String nome){
+             try{
+                 sql = "SELECT ID, NOME FROM TIPO_CATEGORIA WHERE NOME LIKE ?";
+                 
+                 setStatement(getConexao().prepareStatement(sql));
+                 
+                 getStatement().setString(1,nome +"%");
+                 
+                 setResultado(getStatement().executeQuery());
+             }catch(Exception e){
+                 System.out.println(e.getMessage());
+             }
+             
+             return getResultado();
+         }
+         
+    public Boolean alterar(int id, String novoNome){
+        try{
+            sql = "UPDATE TIPO_CATEGORIA SET NOME = ? WHERE ID = ?";
+
+            setStatement(getConexao().prepareStatement(sql));
+
+            getStatement().setInt(2, id);
+            getStatement().setString(1, novoNome);
+
+            getStatement().executeUpdate();
+            
+            return true;    
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }       
 }
    

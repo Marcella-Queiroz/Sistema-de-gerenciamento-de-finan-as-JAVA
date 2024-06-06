@@ -120,10 +120,13 @@
             <StringItem index="0" value="Listar"/>
             <StringItem index="1" value="Receitas"/>
             <StringItem index="2" value="Despesas"/>
-            <StringItem index="3" value=" "/>
+            <StringItem index="3" value="Tipo Categoria"/>
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxListarActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>

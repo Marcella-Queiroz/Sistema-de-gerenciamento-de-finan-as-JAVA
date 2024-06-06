@@ -5,8 +5,13 @@
 package com.mycompany.tipoCategoria;
 
 import com.mycompany.dao.DaoTipoCategoria;
+import com.mycompany.modelo.ModTipoCategoria;
+import com.mycompany.utilidades.DadosTemporarios;
+import com.mycompany.utilidades.Formularios;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
-
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,6 +22,10 @@ public class ListTipoCategoria extends javax.swing.JFrame {
 
     public ListTipoCategoria() {
         initComponents();
+        
+        setLocationRelativeTo(null);
+        
+        listarTodos();
     }
 
     public void listarTodos(){
@@ -60,10 +69,34 @@ public class ListTipoCategoria extends javax.swing.JFrame {
                 
             }
         }catch(Exception e){
+            System.out.println(e.getMessage());
         }
     }
     
+    public void listarPorNome(String pNome){
+        try{
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableTipoCategoria.getModel();
+            
+            tableTipoCategoria.setModel(defaultTableModel);
+            
+            DaoTipoCategoria daoTipoCategoria = new DaoTipoCategoria();
+            
+            ResultSet resultSet = daoTipoCategoria.listarPorNome(pNome);
+        
+            defaultTableModel.setRowCount(0);
+            while(resultSet.next()){
+                String id = resultSet.getString(1);
+                String nome = resultSet.getString(2);
 
+                defaultTableModel.addRow(new Object[]{id,nome});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -76,7 +109,7 @@ public class ListTipoCategoria extends javax.swing.JFrame {
         jtfFiltrar1 = new javax.swing.JComboBox<>();
         jtfLabelRegistro1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tableTipoCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,12 +121,25 @@ public class ListTipoCategoria extends javax.swing.JFrame {
             new String [] {
                 "ID", "Tipo de Categoria"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableTipoCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableTipoCategoriaMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tableTipoCategoria);
 
         jtfButtonBuscar1.setText("Buscar");
 
-        jtfFiltrar1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "ID", "Nome", "Descrição" }));
+        jtfFiltrar1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "ID", "Nome" }));
 
         jtfLabelRegistro1.setText("Dê dois cliques no registro para editá-lo");
 
@@ -158,9 +204,25 @@ public class ListTipoCategoria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    private void tableTipoCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableTipoCategoriaMouseClicked
+        if(evt.getClickCount() == 2){
+            ModTipoCategoria modTipoCategoria = new ModTipoCategoria();
+            
+            modTipoCategoria.setId(Integer.parseInt(String.valueOf(tableTipoCategoria.getValueAt(tableTipoCategoria.getSelectedRow(), 0))));
+            modTipoCategoria.setNome(String.valueOf(tableTipoCategoria.getValueAt(tableTipoCategoria.getSelectedRow(), 1)));
+            
+            DadosTemporarios.tempObject = (ModTipoCategoria) modTipoCategoria;
+        
+            if(Formularios.cadTipoCategoria == null){
+                Formularios.cadTipoCategoria = new CadTipoCategoria();
+           
+            ((CadTipoCategoria)Formularios.cadTipoCategoria).existeDadosTemporarios();   
+                Formularios.cadTipoCategoria.setVisible(true); 
+                Formularios.cadTipoCategoria.setExtendedState(JFrame.NORMAL);
+            }
+        }
+    }//GEN-LAST:event_tableTipoCategoriaMouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -56,9 +56,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jtfFiltrar1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcbFiltro" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jtfTextField1" max="32767" attributes="0"/>
+                          <Component id="jtfFiltro" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jtfButtonBuscar1" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -81,9 +81,9 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jtfTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfFiltro" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jtfButtonBuscar1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfFiltrar1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcbFiltro" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Component id="jtfLabelRegistro1" min="-2" max="-2" attributes="0"/>
@@ -117,14 +117,17 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JTextField" name="jtfTextField1">
+        <Component class="javax.swing.JTextField" name="jtfFiltro">
         </Component>
         <Component class="javax.swing.JButton" name="jtfButtonBuscar1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfButtonBuscar1ActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jtfFiltrar1">
+        <Component class="javax.swing.JComboBox" name="jcbFiltro">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">

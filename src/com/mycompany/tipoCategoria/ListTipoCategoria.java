@@ -67,6 +67,7 @@ public class ListTipoCategoria extends javax.swing.JFrame {
                 String id = resultSet.getString(1);
                 String nome = resultSet.getString(2);
                 
+                defaultTableModel.addRow(new Object[]{id, nome});
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -104,9 +105,9 @@ public class ListTipoCategoria extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableTipoCategoria = new javax.swing.JTable();
-        jtfTextField1 = new javax.swing.JTextField();
+        jtfFiltro = new javax.swing.JTextField();
         jtfButtonBuscar1 = new javax.swing.JButton();
-        jtfFiltrar1 = new javax.swing.JComboBox<>();
+        jcbFiltro = new javax.swing.JComboBox<>();
         jtfLabelRegistro1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -138,8 +139,13 @@ public class ListTipoCategoria extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tableTipoCategoria);
 
         jtfButtonBuscar1.setText("Buscar");
+        jtfButtonBuscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfButtonBuscar1ActionPerformed(evt);
+            }
+        });
 
-        jtfFiltrar1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "ID", "Nome" }));
+        jcbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "ID", "Nome" }));
 
         jtfLabelRegistro1.setText("Dê dois cliques no registro para editá-lo");
 
@@ -151,9 +157,9 @@ public class ListTipoCategoria extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jtfFiltrar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jcbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtfTextField1)
+                        .addComponent(jtfFiltro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtfButtonBuscar1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -170,9 +176,9 @@ public class ListTipoCategoria extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfButtonBuscar1)
-                    .addComponent(jtfFiltrar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addComponent(jtfLabelRegistro1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -223,6 +229,20 @@ public class ListTipoCategoria extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tableTipoCategoriaMouseClicked
 
+    private void jtfButtonBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfButtonBuscar1ActionPerformed
+        switch(jcbFiltro.getSelectedIndex()){
+            case 0:
+                listarTodos();
+                break;
+            case 1:
+                listarPorID(Integer.parseInt(jtfFiltro.getText()));
+                break;
+            case 2:
+                listarPorNome(jtfFiltro.getText());
+                break;
+        }
+    }//GEN-LAST:event_jtfButtonBuscar1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -259,10 +279,10 @@ public class ListTipoCategoria extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JComboBox<String> jcbFiltro;
     private javax.swing.JButton jtfButtonBuscar1;
-    private javax.swing.JComboBox<String> jtfFiltrar1;
+    private javax.swing.JTextField jtfFiltro;
     private javax.swing.JLabel jtfLabelRegistro1;
-    private javax.swing.JTextField jtfTextField1;
     private javax.swing.JTable tableTipoCategoria;
     // End of variables declaration//GEN-END:variables
 }

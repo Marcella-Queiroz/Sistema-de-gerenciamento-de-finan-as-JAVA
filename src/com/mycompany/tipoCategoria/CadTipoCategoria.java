@@ -93,6 +93,23 @@ public class CadTipoCategoria extends javax.swing.JFrame {
         dispose();
     }
     
+        private void excluir(){
+        DaoTipoCategoria daoTipoCategoria = new DaoTipoCategoria();
+        
+        if (daoTipoCategoria.excluir(Integer.parseInt(jtfTextFieldID.getText()))){
+            JOptionPane.showMessageDialog(null, "Categoria " + jtfTipoCategoria.getText() + " excluída com sucesso!");
+            
+            jtfTextFieldID.setText("");
+            jtfTipoCategoria.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possível excluir a categoria!");
+        }
+        
+        ((ListTipoCategoria) Formularios.listTipoCategoria).listarTodos();
+        
+        dispose();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -129,6 +146,11 @@ public class CadTipoCategoria extends javax.swing.JFrame {
         });
 
         btnButtonExcluir.setText("Excluir");
+        btnButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnButtonExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,6 +212,16 @@ public class CadTipoCategoria extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         Formularios.cadTipoCategoria = null;
     }//GEN-LAST:event_formWindowClosed
+
+    private void btnButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnButtonExcluirActionPerformed
+        int escolha = 
+                JOptionPane.showConfirmDialog(
+                        null, 
+                        "Deseja realmente excluir a categoria " + jtfTipoCategoria.getText() + "?");
+        
+        if(escolha == JOptionPane.YES_OPTION)
+            excluir();
+    }//GEN-LAST:event_btnButtonExcluirActionPerformed
 
     /**
      * @param args the command line arguments

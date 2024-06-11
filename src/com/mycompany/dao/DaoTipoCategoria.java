@@ -60,7 +60,7 @@ public class DaoTipoCategoria extends BancoDeDadosMySql{
     
          public ResultSet listarPorId(int id){
             try{
-                sql =  "SELECT ID, NOME,FROM TIPO_CATEGORIA WHERE NOME LIKE ?";
+                sql =  "SELECT ID, NOME FROM TIPO_CATEGORIA WHERE ID = ?";
                
                 setStatement(getConexao().prepareStatement(sql));
             
@@ -105,6 +105,23 @@ public class DaoTipoCategoria extends BancoDeDadosMySql{
             System.out.println(e.getMessage());
             return false;
         }
-    }       
+    }
+    
+    public Boolean excluir(int id){
+        try{
+            sql = "DELETE FROM TIPO_CATEGORIA WHERE ID = ?";
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setInt(1, id);
+            
+            getStatement().executeUpdate();
+            
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
 }
    

@@ -90,7 +90,8 @@ public class CadTipoCategoria extends javax.swing.JFrame {
         
         ((ListTipoCategoria) Formularios.listTipoCategoria).listarTodos();
         
-        dispose();
+      
+      dispose();
     }
     
         private void excluir(){

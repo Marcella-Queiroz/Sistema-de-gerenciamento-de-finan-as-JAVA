@@ -15,7 +15,7 @@ public class DaoMetas extends BancoDeDadosMySql {
     
     public Boolean inserir(String metas, Double valor, String descricao, String data_inicial, String data_final){
     try{
-        sql = "INSERT INTO METAS (METAS, VALOR, DESCRICAO, DATA_INICIAL, DATA_FINAL) VALUES (?,?,?,?,?,?)";
+        sql = "INSERT INTO METAS (NOME, VALOR, DESCRICAO, DATA_INICIAL, DATA_FINAL) VALUES (?,?,?,?,?)";
         
          setStatement(getConexao().prepareStatement(sql));
          
@@ -55,7 +55,7 @@ public class DaoMetas extends BancoDeDadosMySql {
     }
 public ResultSet ListarTodos(){
     try{
-        sql = "SELECT ID, METAS, VALOR, DESCRICAO, DATA_INICIAL, DATA_FINAL FROM METAS";
+        sql = "SELECT ID, NOME, VALOR, DESCRICAO, DATA_INICIAL, DATA_FINAL FROM METAS";
 
         setStatement(getConexao().prepareStatement(sql));
         
@@ -94,18 +94,18 @@ public ResultSet ListarTodos(){
     }
     return getResultado();
     }
-    public Boolean alterar(int id, String meta, int preco, String descricao, String data_inicial, String data_final){
+    public Boolean alterar(int ID, String nome, Double valor, String descricao, String data_inicial, String data_final ){
         try{
             sql = "UPDATE METAS SET NOME = ?, VALOR = ?, DESCRICAO = ?,DATA_INICIAL = ?, DATA_FINAL = ? WHERE ID = ?";
             
             setStatement(getConexao().prepareStatement(sql));
-            
-            getStatement().setInt(6, id);
-            getStatement().setString(1, meta);
-            getStatement().setInt(2, preco);
+            getStatement().setInt(6,ID);
+            getStatement().setString(1, nome);
+            getStatement().setDouble(2, valor);
             getStatement().setString(3, descricao);
             getStatement().setString(4, data_inicial);
             getStatement().setString(5, data_final);
+            
             getStatement().executeQuery();
             
             return true;

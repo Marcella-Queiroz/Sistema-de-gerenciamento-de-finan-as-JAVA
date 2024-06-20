@@ -6,6 +6,7 @@ package sisgerenciamentocontas;
 
 import com.mycompany.despesas.CadDespesas;
 import com.mycompany.metas.CadMetas;
+import com.mycompany.metas.ListMetas;
 import com.mycompany.receitas.CadReceitas;
 import com.mycompany.tipoCategoria.CadTipoCategoria;
 import com.mycompany.utilidades.BancoDeDadosMySql;
@@ -67,7 +68,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxListar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Listar", "Receitas", "Despesas", "Tipo Categoria" }));
+        jComboBoxListar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Listar", "Receitas", "Despesas", "Tipo Categoria", "Metas" }));
         jComboBoxListar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxListarActionPerformed(evt);
@@ -167,6 +168,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 Formularios.listTipoCategoria.setVisible(true);
                 
                 break;
+            case 4:
+                if (Formularios.listMetas == null)
+                    Formularios.listMetas = new ListMetas();
+
+                Formularios.listMetas.setVisible(true);
         }
     }//GEN-LAST:event_jComboBoxListarActionPerformed
     

@@ -117,7 +117,7 @@ public class ListMetas extends javax.swing.JFrame {
         jcbFiltro = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         TableMetas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -129,7 +129,15 @@ public class ListMetas extends javax.swing.JFrame {
             new String [] {
                 "ID", "Nome", "Valor", "Descrição", "Data Inicial", "Data Final"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TableMetas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TableMetasMouseClicked(evt);
@@ -186,19 +194,24 @@ public class ListMetas extends javax.swing.JFrame {
 
     private void TableMetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMetasMouseClicked
         if(evt.getClickCount() == 2){
-            ModMetas modTipoCategoria = new ModMetas();
+            ModMetas modMetas = new ModMetas();
             
-            modTipoCategoria.setId(Integer.parseInt(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 0))));
-            modTipoCategoria.setNome(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 1)));
+            modMetas.setId(Integer.parseInt(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 0))));
+            modMetas.setNome(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 1)));
+            modMetas.setValor(Float.parseFloat(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 2))));            
+            modMetas.setDescricao(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 3)));
+            modMetas.setDataInicial(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 4)));
+            modMetas.setDataFinal(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 5)));
             
-            DadosTemporarios.tempObject = (ModMetas) modTipoCategoria;
+            
+            DadosTemporarios.tempObject = (ModMetas) modMetas;
         
             if(Formularios.cadMetas == null){
-                Formularios.cadTipoCategoria = new CadMetas();
+                Formularios.cadMetas = new CadMetas();
            
-            ((CadMetas)Formularios.cadTipoCategoria).existeDadosTemporarios();   
-                Formularios.cadTipoCategoria.setVisible(true); 
-                Formularios.cadTipoCategoria.setExtendedState(JFrame.NORMAL);
+            ((CadMetas)Formularios.cadMetas).existeDadosTemporarios();   
+                Formularios.cadMetas.setVisible(true); 
+                Formularios.cadMetas.setExtendedState(JFrame.NORMAL);
             }
         }
                                            

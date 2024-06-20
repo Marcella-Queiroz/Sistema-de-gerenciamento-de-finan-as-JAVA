@@ -48,9 +48,22 @@ public class CadMetas extends javax.swing.JFrame {
     if (DadosTemporarios.tempObject instanceof ModMetas){
         int id =((ModMetas) DadosTemporarios.tempObject).getId();
         String nome = ((ModMetas) DadosTemporarios.tempObject).getNome();
-
+        float Valor = ((ModMetas) DadosTemporarios.tempObject).getValor();
+        String Descricao = ((ModMetas) DadosTemporarios.tempObject).getDescricao();
+        String DataInicial = ((ModMetas) DadosTemporarios.tempObject).getDataInicial();
+        String DataFinal = ((ModMetas) DadosTemporarios.tempObject).getDataFinal();
+        
+        
         jtfIdMetas.setText(String.valueOf(id));
         jtfMetas.setText(nome);
+        jTextFieldValor.setText(String.valueOf(Valor));
+        jtfDescricao.setText(Descricao);
+        jfDtInicial.setText(DataInicial);
+        jfDtFinal.setText(DataFinal);
+        
+        
+        
+        
 
         DadosTemporarios.tempObject = null;
 
@@ -69,12 +82,12 @@ public class CadMetas extends javax.swing.JFrame {
             String dtFinal = jfDtFinal.getText();
             
             if(daoMetas.inserir(nomeMetas, valor, descricao, dtInicial, dtFinal)){
-                JOptionPane.showMessageDialog(null, "Novo tipo de categoria cadastrado com sucesso.");
+                JOptionPane.showMessageDialog(null, "Novo tipo de Metas cadastrado com sucesso.");
 
                 jtfIdMetas.setText(String.valueOf(daoMetas.buscarProximoID()));
                 jtfMetas.setText("");
             }else{
-                JOptionPane.showMessageDialog(null, "Erro ao cadastrar o tipo da categoria.");
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar o tipo de Metas.");
             }
         }
     
@@ -82,13 +95,13 @@ public class CadMetas extends javax.swing.JFrame {
         private void alterar(){
         DaoMetas daoMetas = new DaoMetas();
         
-            String nomeMetas = jtfMetas.getText();
-            Double valor = Double.valueOf(jTextFieldValor.getText());
-            String descricao = jtfDescricao.getText();
-            String dtInicial = jfDtInicial.getText();
-            String dtFinal = jfDtFinal.getText();
+           
+            
+        if(daoMetas.alterar(Integer.parseInt(jtfIdMetas.getText()), jtfMetas.getText(), Double.parseDouble(jTextFieldValor.getText()), jfDtInicial.getText(), jtfDescricao.getText(), jfDtFinal.getText())){
+                
         
-        if (daoMetas.alterar(nomeMetas, valor, descricao, dtInicial, dtFinal)){
+             
+            
             JOptionPane.showMessageDialog(null, "Categoria alterada com sucesso!");
             
             jtfIdMetas.setText("");
@@ -106,16 +119,16 @@ public class CadMetas extends javax.swing.JFrame {
         private void excluir(){
         DaoTipoCategoria daoTipoCategoria = new DaoTipoCategoria();
         
-        if (daoTipoCategoria.excluir(Integer.parseInt(jtfTextFieldID.getText()))){
-            JOptionPane.showMessageDialog(null, "Categoria " + jtfTipoCategoria.getText() + " excluída com sucesso!");
+        if (daoTipoCategoria.excluir(Integer.parseInt(jtfIdMetas.getText()))){
+            JOptionPane.showMessageDialog(null, "Categoria " + jtfMetas.getText() + " excluída com sucesso!");
             
-            jtfTextFieldID.setText("");
-            jtfTipoCategoria.setText("");
+            jtfIdMetas.setText("");
+            jtfMetas.setText("");
         }else{
             JOptionPane.showMessageDialog(null, "Não foi possível excluir a categoria!");
         }
         
-        ((ListTipoCategoria) Formularios.listTipoCategoria).listarTodos();
+        ((ListMetas) Formularios.listMetas).listarTodos();
         
         dispose();
     }
@@ -144,6 +157,11 @@ public class CadMetas extends javax.swing.JFrame {
         jtfMetas = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -153,6 +171,11 @@ public class CadMetas extends javax.swing.JFrame {
         });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         jtfLabelDtLancamento.setText("Descrição");
 
@@ -273,9 +296,21 @@ public class CadMetas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+         Formularios.cadMetas = null;
+    }//GEN-LAST:event_formWindowClosed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int escolha = 
+                JOptionPane.showConfirmDialog(
+                        null, 
+                        "Deseja realmente excluir a categoria " + jtfMetas.getText() + "?");
+        
+        if(escolha == JOptionPane.YES_OPTION)
+            excluir();                        
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

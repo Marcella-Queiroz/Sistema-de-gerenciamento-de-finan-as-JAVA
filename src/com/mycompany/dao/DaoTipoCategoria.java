@@ -29,7 +29,7 @@ public class DaoTipoCategoria extends BancoDeDadosMySql{
         int id = 0;
         
         try{
-            sql = "SELECT IFNULL(MAX(ID)) + 1 FROM TIPO_CATEGORIA";
+            sql = "SELECT IFNULL(MAX(ID),0) + 1 FROM TIPO_CATEGORIA";
             
             setStatement(getConexao().prepareStatement(sql));
             

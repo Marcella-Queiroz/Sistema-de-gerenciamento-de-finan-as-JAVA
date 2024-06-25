@@ -1,29 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.dao;
 
 import com.mycompany.utilidades.BancoDeDadosMySql;
 import java.sql.ResultSet;
-/**
- *
- * @author marcella.1963
- */
-public class DaoMetas extends BancoDeDadosMySql {
+
+public class DaoDespesas extends BancoDeDadosMySql{
     private String sql;
     
-    public Boolean inserir(String metas, Double valor, String descricao, String data_inicial, String data_final){
+    public Boolean inserir(int categoriaId, String nome, Double Valor, String Vencimento, String Pagamento ){
     try{
-        sql = "INSERT INTO METAS (NOME, VALOR, DESCRICAO, DATA_INICIAL, DATA_FINAL) VALUES (?,?,?,?,?)";
+        sql = "INSERT INTO DESPESAS (CATEGORIA_ID, NOME, VALOR, VENCIMENTO, PAGAMENTO) VALUES (?,?,?,?,?)";
         
          setStatement(getConexao().prepareStatement(sql));
          
-         getStatement().setString(1, metas);
-         getStatement().setDouble(2, valor);
-         getStatement().setString(3, descricao);
-         getStatement().setString(4, data_inicial);
-         getStatement().setString(5, data_final);
+         getStatement().setInt(1, categoriaId);
+         getStatement().setString(2, nome);
+         getStatement().setDouble(3, Valor);
+         getStatement().setString(4, Vencimento);
+         getStatement().setString(5, Pagamento);
          
          getStatement().executeUpdate();
          
@@ -38,7 +31,7 @@ public class DaoMetas extends BancoDeDadosMySql {
     public int buscarProximoID(){
         int id =0;
         try{
-            sql = "SELECT IFNULL(MAX(ID), 0) + 1 FROM METAS";
+            sql = "SELECT IFNULL(MAX(ID), 0) + 1 FROM DESPESAS";
             
             setStatement(getConexao().prepareStatement(sql));
             
@@ -55,8 +48,8 @@ public class DaoMetas extends BancoDeDadosMySql {
     }
 public ResultSet ListarTodos(){
     try{
-        sql = "SELECT ID, NOME, VALOR, DESCRICAO, DATA_INICIAL, DATA_FINAL FROM METAS";
-
+        sql = "SELECT ID, CATEGORIA, DESPESAS, VALOR, VENCIMENTO, PAGAMENTO FROM METAS";
+            
         setStatement(getConexao().prepareStatement(sql));
         
          setResultado(getStatement().executeQuery());  
@@ -68,7 +61,7 @@ public ResultSet ListarTodos(){
    
     public ResultSet listarPorId(int id){
     try{
-        sql = "SELECT ID, NOME FROM METAS WHERE ID = ?";
+        sql = "SELECT ID, NOME FROM DESPESAS WHERE ID = ?";
             
         setStatement(getConexao().prepareStatement(sql));
             
@@ -82,7 +75,7 @@ public ResultSet ListarTodos(){
     }
     public ResultSet ListarPorNome(String nome){
     try{
-        sql = "SELECT ID, NOME FROM METAS WHERE NOME LIKE ?";
+        sql = "SELECT ID, NOME FROM DESPESAS WHERE NOME LIKE ?";
         
         setStatement(getConexao().prepareStatement(sql));
         
@@ -94,17 +87,17 @@ public ResultSet ListarTodos(){
     }
     return getResultado();
     }
-    public Boolean alterar(int ID, String nome, Double valor, String descricao, String data_inicial, String data_final ){
+    public Boolean alterar(int ID, String Categoria, String Despesas, Double Valor, String Vencimento, String Pagamento ){
         try{
-            sql = "UPDATE METAS SET NOME = ?, VALOR = ?, DESCRICAO = ?,DATA_INICIAL = ?, DATA_FINAL = ? WHERE ID = ?";
+            sql = "UPDATE DESPESAS SET CATEGORIA = ?, DESPESAS = ?, VALOR = ?, VENCIMENTO = ?, PAGAMENTO = ? WHERE ID = ?";
             
             setStatement(getConexao().prepareStatement(sql));
             getStatement().setInt(6,ID);
-            getStatement().setString(1, nome);
-            getStatement().setDouble(2, valor);
-            getStatement().setString(3, descricao);
-            getStatement().setString(4, data_inicial);
-            getStatement().setString(5, data_final);
+            getStatement().setString(1, Categoria);
+            getStatement().setString(2, Despesas);
+            getStatement().setDouble(3, Valor);
+            getStatement().setString(4, Vencimento);
+            getStatement().setString(5, Pagamento);
             
             getStatement().executeUpdate();
             
@@ -116,7 +109,7 @@ public ResultSet ListarTodos(){
 }
     public Boolean excluir (int id ){
      try{
-         sql = "DELETE FROM METAS WHERE ID = ?";
+         sql = "DELETE FROM DESPESAS WHERE ID = ?";
          setStatement(getConexao().prepareCall(sql));
          getStatement().setInt(1, id);
          getStatement().executeUpdate();

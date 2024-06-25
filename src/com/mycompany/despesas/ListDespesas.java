@@ -4,6 +4,10 @@
  */
 package com.mycompany.despesas;
 
+import com.mycompany.dao.DaoMetas;
+import javax.swing.table.DefaultTableModel;
+import com.mycompany.dao.DaoDespesas;
+import java.sql.ResultSet;
 /**
  *
  * @author marcella.1963
@@ -15,8 +19,36 @@ public class ListDespesas extends javax.swing.JFrame {
      */
     public ListDespesas() {
         initComponents();
+        
+        setLocationRelativeTo(null);
+        
+        listarTodos();
     }
-
+    public void listarTodos(){
+    try{
+        DefaultTableModel defaultTableModel = (DefaultTableModel)TableDespesas.getModel();
+    
+        TableDespesas.setModel(defaultTableModel);
+    
+        DaoDespesas daoDespesas = new DaoDespesas();
+    
+        ResultSet resultSet = daoDespesas.ListarTodos();
+        
+        defaultTableModel.setRowCount(0);
+        while(resultSet.next()){
+            String id = resultSet.getString(1);
+            String categoria = resultSet.getString(2);
+            String Despesa = resultSet.getString(3);
+            Double valor = resultSet.getDouble(4);
+            String vencimento = resultSet.getString(5);
+            String pagamento = resultSet.getString(6);
+            
+            defaultTableModel.addRow(new Object[]{id, categoria, Despesa, valor, vencimento, pagamento});
+        }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,7 +66,7 @@ public class ListDespesas extends javax.swing.JFrame {
         jtfFiltrar1 = new javax.swing.JComboBox<>();
         jtfLabelRegistro1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TableDespesas = new javax.swing.JTable();
         jtfFiltrar = new javax.swing.JComboBox<>();
         jtfLabelRegistro = new javax.swing.JLabel();
 
@@ -93,7 +125,7 @@ public class ListDespesas extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TableDespesas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -104,7 +136,7 @@ public class ListDespesas extends javax.swing.JFrame {
                 "ID", "Categoria", "Despesa", "Valor", "Vencimento", "Pagamento"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TableDespesas);
 
         jtfFiltrar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "ID", "Nome", "Descrição" }));
 
@@ -201,10 +233,10 @@ public class ListDespesas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TableDespesas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JButton jtfButtonBuscar1;
     private javax.swing.JComboBox<String> jtfFiltrar;

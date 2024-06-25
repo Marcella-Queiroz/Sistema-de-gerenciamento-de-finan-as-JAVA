@@ -97,11 +97,8 @@ public class CadMetas extends javax.swing.JFrame {
         
            
             
-        if(daoMetas.alterar(Integer.parseInt(jtfIdMetas.getText()), jtfMetas.getText(), Double.parseDouble(jTextFieldValor.getText()), jfDtInicial.getText(), jtfDescricao.getText(), jfDtFinal.getText())){
-                
-        
-             
-            
+        if(daoMetas.alterar(Integer.parseInt(jtfIdMetas.getText()), jtfMetas.getText(), Double.parseDouble(jTextFieldValor.getText()), jtfDescricao.getText(), jfDtInicial.getText(), jfDtFinal.getText())){
+
             JOptionPane.showMessageDialog(null, "Categoria alterada com sucesso!");
             
             jtfIdMetas.setText("");
@@ -117,15 +114,15 @@ public class CadMetas extends javax.swing.JFrame {
     }
     
         private void excluir(){
-        DaoTipoCategoria daoTipoCategoria = new DaoTipoCategoria();
+        DaoMetas daoMetas = new DaoMetas();
         
-        if (daoTipoCategoria.excluir(Integer.parseInt(jtfIdMetas.getText()))){
-            JOptionPane.showMessageDialog(null, "Categoria " + jtfMetas.getText() + " excluída com sucesso!");
+        if (daoMetas.excluir(Integer.parseInt(jtfIdMetas.getText()))){
+            JOptionPane.showMessageDialog(null, "Meta" + jtfMetas.getText() + " excluída com sucesso!");
             
             jtfIdMetas.setText("");
             jtfMetas.setText("");
         }else{
-            JOptionPane.showMessageDialog(null, "Não foi possível excluir a categoria!");
+            JOptionPane.showMessageDialog(null, "Não foi possível excluir a !");
         }
         
         ((ListMetas) Formularios.listMetas).listarTodos();

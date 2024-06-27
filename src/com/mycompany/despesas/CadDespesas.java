@@ -93,8 +93,8 @@ public class CadDespesas extends javax.swing.JFrame {
         private void alterar(){
             DaoDespesas daoDespesas = new DaoDespesas();
             
-            if (daoDespesas.alterar(Integer.parseInt(jtfIdDespesas.getText()), jtfIdCategoria.getText(), jtfDespesas.getText(), Double.parseDouble(jtfValor.getText()), jtfVencimento.getText(), jtfPagamento.getText())){
-                JOptionPane.showMessageDialog(null, " Excluido com sucesso! ");
+            if (daoDespesas.alterar(Integer.parseInt(jtfIdDespesas.getText()),Integer.parseInt(jtfIdCategoria.getText()), jtfDespesas.getText(), Float.parseFloat(jtfValor.getText()), jtfVencimento.getText(), jtfPagamento.getText())){
+                JOptionPane.showMessageDialog(null, " Alterado com sucesso! ");
                 
                 jtfIdDespesas.setText("");
                 jtfDespesas.setText("");
@@ -134,6 +134,11 @@ public class CadDespesas extends javax.swing.JFrame {
         jtfIdCategoria = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel2.setText("Pagamento");
 
@@ -281,6 +286,10 @@ public class CadDespesas extends javax.swing.JFrame {
             dispose();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        Formularios.cadDespesas = null;
+    }//GEN-LAST:event_formWindowClosed
     
     
     public static void main(String args[]) {

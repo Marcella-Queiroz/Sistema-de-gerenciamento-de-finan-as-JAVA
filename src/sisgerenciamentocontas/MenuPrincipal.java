@@ -5,6 +5,7 @@
 package sisgerenciamentocontas;
 
 import com.mycompany.despesas.CadDespesas;
+import com.mycompany.despesas.ListDespesas;
 import com.mycompany.metas.CadMetas;
 import com.mycompany.metas.ListMetas;
 import com.mycompany.receitas.CadReceitas;
@@ -29,6 +30,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         if(!BancoDeDadosMySql.conectar()){
             JOptionPane.showMessageDialog(null, "Não foi possível se conectar ao banco de dados. O sistema será finalizado.");
             System.exit(0);
+            
+            
         }
     }
 
@@ -161,6 +164,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jComboBoxListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListarActionPerformed
         switch (jComboBoxListar.getSelectedIndex()) {
+            case 2:
+                if (Formularios.listDespesas == null)
+                    Formularios.listDespesas = new ListDespesas();
+                
+                Formularios.listDespesas.setVisible(true);
+                
+                break;
+                
             case 3:
                 if (Formularios.listTipoCategoria == null)
                     Formularios.listTipoCategoria = new ListTipoCategoria();

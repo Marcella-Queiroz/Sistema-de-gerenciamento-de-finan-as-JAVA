@@ -48,7 +48,7 @@ public class DaoDespesas extends BancoDeDadosMySql{
     }
 public ResultSet ListarTodos(){
     try{
-        sql = "SELECT ID, CATEGORIA, DESPESAS, VALOR, VENCIMENTO, PAGAMENTO FROM METAS";
+        sql = "SELECT ID, CATEGORIA_ID, NOME, VALOR, VENCIMENTO, PAGAMENTO FROM DESPESAS";
             
         setStatement(getConexao().prepareStatement(sql));
         
@@ -87,15 +87,15 @@ public ResultSet ListarTodos(){
     }
     return getResultado();
     }
-    public Boolean alterar(int ID, String Categoria, String Despesas, Double Valor, String Vencimento, String Pagamento ){
+    public Boolean alterar(int ID, int Categoria_id, String Despesas, Float Valor, String Vencimento, String Pagamento ){
         try{
-            sql = "UPDATE DESPESAS SET CATEGORIA = ?, DESPESAS = ?, VALOR = ?, VENCIMENTO = ?, PAGAMENTO = ? WHERE ID = ?";
+            sql = "UPDATE DESPESAS SET CATEGORIA_ID = ?, NOME = ?, VALOR = ?, VENCIMENTO = ?, PAGAMENTO = ? WHERE ID = ?";
             
             setStatement(getConexao().prepareStatement(sql));
             getStatement().setInt(6,ID);
-            getStatement().setString(1, Categoria);
+            getStatement().setInt(1, Categoria_id);
             getStatement().setString(2, Despesas);
-            getStatement().setDouble(3, Valor);
+            getStatement().setFloat(3, Valor);
             getStatement().setString(4, Vencimento);
             getStatement().setString(5, Pagamento);
             

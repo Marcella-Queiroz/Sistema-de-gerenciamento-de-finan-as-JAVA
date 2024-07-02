@@ -2,6 +2,7 @@ package com.mycompany.dao;
 
 import com.mycompany.utilidades.BancoDeDadosMySql;
 import java.sql.ResultSet;
+import java.sql.Types;
 
 public class DaoDespesas extends BancoDeDadosMySql{
     private String sql;
@@ -15,12 +16,22 @@ public class DaoDespesas extends BancoDeDadosMySql{
          getStatement().setInt(1, categoriaId);
          getStatement().setString(2, nome);
          getStatement().setDouble(3, Valor);
-         getStatement().setString(4, Vencimento);
-         getStatement().setString(5, Pagamento);
          
-         getStatement().executeUpdate();
+        if(Vencimento.equals("")){
+            getStatement().setNull(4, Types.DATE);
+        }else{
+            getStatement().setString(4, Vencimento);
+        }
+        
+        if(Vencimento.equals("")){
+            getStatement().setNull(5, Types.DATE);
+        }else{
+            getStatement().setString(5, Pagamento);
+        }
+        
+        getStatement().executeUpdate();
          
-         return true;
+        return true;
          
     }catch(Exception e){
         System.err.println(e.getLocalizedMessage());
@@ -98,6 +109,18 @@ public ResultSet ListarTodos(){
             getStatement().setFloat(3, Valor);
             getStatement().setString(4, Vencimento);
             getStatement().setString(5, Pagamento);
+            
+            if(Vencimento.equals("")){
+                getStatement().setNull(4, Types.DATE);
+            }else{
+                getStatement().setString(4, Vencimento);
+            }
+        
+            if(Vencimento.equals("")){
+                getStatement().setNull(5, Types.DATE);
+            }else{
+                getStatement().setString(5, Pagamento);
+            }
             
             getStatement().executeUpdate();
             

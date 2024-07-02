@@ -71,26 +71,27 @@ public class CadDespesas extends javax.swing.JFrame {
         }else
             return false;
     }
-        private void inserir(){
-            DaoDespesas daoDespesas = new DaoDespesas();
-            
-            int categoriaId = Integer.parseInt(jtfIdCategoria.getText());
-            String despesas =jtfDespesas.getText();
-            Double valor = Double.valueOf(jtfValor.getText());
-            String vencimento = jtfVencimento.getText();
-            String pagamento = jtfPagamento.getText();
-            
-            if (daoDespesas.inserir(categoriaId, despesas, valor, vencimento, pagamento)){
-                JOptionPane.showMessageDialog(null, "Novo tipo de depesa cadastrado! ");
-                
-                jtfIdCategoria.setText(String.valueOf(daoDespesas.buscarProximoID()));
-                jtfDespesas.setText("");
-                
-            }else{
-                JOptionPane.showMessageDialog(null, "Erro ao cadastrar a despesa");
-              }
-        }
-        private void alterar(){
+    private void inserir(){
+        DaoDespesas daoDespesas = new DaoDespesas();
+
+        int categoriaId = Integer.parseInt(jtfIdCategoria.getText());
+        String despesas =jtfDespesas.getText();
+        Double valor = Double.valueOf(jtfValor.getText());
+        String vencimento = jtfVencimento.getText();
+        String pagamento = jtfPagamento.getText();
+
+        if (daoDespesas.inserir(categoriaId, despesas, valor, vencimento, pagamento)){
+            JOptionPane.showMessageDialog(null, "Novo tipo de depesa cadastrado! ");
+
+            jtfIdCategoria.setText(String.valueOf(daoDespesas.buscarProximoID()));
+            jtfDespesas.setText("");
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar a despesa");
+          }
+    }
+    
+    private void alterar(){
             DaoDespesas daoDespesas = new DaoDespesas();
             
             if (daoDespesas.alterar(Integer.parseInt(jtfIdDespesas.getText()),Integer.parseInt(jtfIdCategoria.getText()), jtfDespesas.getText(), Float.parseFloat(jtfValor.getText()), jtfVencimento.getText(), jtfPagamento.getText())){
@@ -99,14 +100,30 @@ public class CadDespesas extends javax.swing.JFrame {
                 jtfIdDespesas.setText("");
                 jtfDespesas.setText("");
         }else{
-        JOptionPane.showMessageDialog(null, "Não foi possivel excluir a despesa! ");
-    }
+            JOptionPane.showMessageDialog(null, "Não foi possivel excluir a despesa! ");
+        }
             ((ListDespesas)Formularios.listDespesas).listarTodos();
             
             dispose();
-        }
+    }
     
-//    private void inserir
+    private void excluir(){
+        DaoDespesas daoDespesas = new DaoDespesas();
+        
+        if (daoDespesas.excluir(Integer.parseInt(jtfIdDespesas.getText()))){
+            JOptionPane.showMessageDialog(null, "Despesa" + jtfDespesas.getText() + " excluída com sucesso!");
+            
+            jtfIdDespesas.setText("");
+            jtfDespesas.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possível excluir a !");
+        }
+        
+        ((ListDespesas) Formularios.listDespesas).listarTodos();
+        
+        dispose();
+        
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -150,6 +167,11 @@ public class CadDespesas extends javax.swing.JFrame {
         });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         jtfLabelID.setText("ID");
 
@@ -282,7 +304,7 @@ public class CadDespesas extends javax.swing.JFrame {
             jtfDespesas.setText("");            
         }else if (btnSalvar.getText() == Constantes.BTN_ALTERAR_TEXT){
              alterar();
-            ((ListDespesas) Formularios.listMetas).listarTodos();
+            ((ListDespesas) Formularios.listDespesas).listarTodos();
             dispose();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
@@ -290,6 +312,16 @@ public class CadDespesas extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         Formularios.cadDespesas = null;
     }//GEN-LAST:event_formWindowClosed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int escolha = 
+                JOptionPane.showConfirmDialog(
+                        null, 
+                        "Deseja realmente excluir a categoria " + jtfDespesas.getText() + "?");
+        
+        if(escolha == JOptionPane.YES_OPTION)
+            excluir();                        
+    }//GEN-LAST:event_btnExcluirActionPerformed
     
     
     public static void main(String args[]) {

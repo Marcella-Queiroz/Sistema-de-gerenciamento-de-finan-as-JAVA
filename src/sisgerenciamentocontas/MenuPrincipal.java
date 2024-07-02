@@ -9,6 +9,7 @@ import com.mycompany.despesas.ListDespesas;
 import com.mycompany.metas.CadMetas;
 import com.mycompany.metas.ListMetas;
 import com.mycompany.receitas.CadReceitas;
+import com.mycompany.receitas.ListReceitas;
 import com.mycompany.tipoCategoria.CadTipoCategoria;
 import com.mycompany.utilidades.BancoDeDadosMySql;
 import com.mycompany.utilidades.Formularios;
@@ -164,6 +165,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jComboBoxListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListarActionPerformed
         switch (jComboBoxListar.getSelectedIndex()) {
+            case 1:
+                if (Formularios.listReceitas == null)
+                    Formularios.listReceitas = new ListReceitas();
+                
+                Formularios.listDespesas.setVisible(true);
+                
+                break;                
             case 2:
                 if (Formularios.listDespesas == null)
                     Formularios.listDespesas = new ListDespesas();

@@ -4,7 +4,10 @@
  */
 package com.mycompany.receitas;
 
+import com.mycompany.dao.DaoReceitas;
 import com.mycompany.modelo.ModDespesas;
+import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
 /**
  *
  * @author marcella.1963
@@ -16,7 +19,64 @@ public class ListReceitas extends javax.swing.JFrame {
      */
     public ListReceitas() {
         initComponents();
+        setLocationRelativeTo(null);
+        
+        listarTodos();
     }
+    public void listarTodos(){
+        try{
+            DefaultTableModel defaultTableModel = (DefaultTableModel)TableReceita.getModel();
+    
+            TableReceita.setModel(defaultTableModel);
+            
+            DaoReceitas daoReceitas = new DaoReceitas();
+    
+            ResultSet resultSet = daoReceitas.ListarTodos();
+        
+             defaultTableModel.setRowCount(0);
+            while(resultSet.next()){
+                String id = resultSet.getString(1);
+                String categoria_id = resultSet.getString(2);
+                String nome = resultSet.getString(3);
+                Double valor = resultSet.getDouble(4);
+                String data_de_lançamento = resultSet.getString(5);
+                
+
+                defaultTableModel.addRow(new Object[]{id, categoria_id, nome, valor, data_de_lançamento});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+        // public void listarPorId(int pID){
+       //try{
+       // DefaultTableModel defaultTableModel = (DefaultTableModel) Table.getModel();
+        
+       // TableDespesas.setModel(defaultTableModel);
+        
+        //DaoDespesas daoDespesas = new DaoDespesas();
+        
+       // ResultSet resultSet = daoDespesas.listarPorId(pID);
+        
+       // defaultTableModel.setRowCount(0);
+        
+       // while(resultSet.next()){
+        //    String id = resultSet.getNString(1);
+           // String categoria_id = resultSet.getNString(2);
+           /* String despesa = resultSet.getNString(3);
+            Double valor = resultSet.getDouble(4);
+            String vencimento = resultSet.getNString(5);
+            String pagamento = resultSet.getNString(6);
+            
+            defaultTableModel.addRow(new Object[]{id,categoria_id, despesa, valor, vencimento, pagamento});
+        }
+        
+    }catch(Exception e ){
+        System.out.println(e.getMessage());
+    
+        }
+    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,7 +92,7 @@ public class ListReceitas extends javax.swing.JFrame {
         jtfButtonBuscar1 = new javax.swing.JButton();
         jtfLabelRegistro1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        TableReceita = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,7 +102,7 @@ public class ListReceitas extends javax.swing.JFrame {
 
         jtfLabelRegistro1.setText("Dê dois cliques no registro para editá-lo");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        TableReceita.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -53,12 +113,12 @@ public class ListReceitas extends javax.swing.JFrame {
                 "ID", "Categoria", "Despesa", "Valor", "Data de lançamento"
             }
         ));
-        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+        TableReceita.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable2MouseClicked(evt);
+                TableReceitaMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(TableReceita);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,12 +157,12 @@ public class ListReceitas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+    private void TableReceitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableReceitaMouseClicked
     if(evt.getClickCount() ==2){
     
     }
     
-    }//GEN-LAST:event_jTable2MouseClicked
+    }//GEN-LAST:event_TableReceitaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -141,8 +201,8 @@ public class ListReceitas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TableReceita;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JButton jtfButtonBuscar1;
     private javax.swing.JComboBox<String> jtfFiltrar1;
     private javax.swing.JLabel jtfLabelRegistro1;

@@ -31,27 +31,31 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jSeparator1" max="32767" attributes="0"/>
                   <Component id="jSeparator3" max="32767" attributes="0"/>
-                  <Component id="jtfTextFieldDespesas" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jtfReceita" alignment="0" max="32767" attributes="0"/>
                   <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
                   <Component id="jSeparator4" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jtfButtonSalvar" min="-2" pref="78" max="-2" attributes="0"/>
+                              <Component id="btnSalvar" min="-2" pref="78" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jtfButtonExcluir" min="-2" pref="80" max="-2" attributes="0"/>
+                              <Component id="btnExcluir" min="-2" pref="80" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jtfLabelID" alignment="0" min="-2" pref="21" max="-2" attributes="0"/>
-                          <Component id="jtfTextFieldID" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jtfLabelCategoria" pref="96" max="32767" attributes="0"/>
-                              <Component id="jtfComboBoxCategoria" max="32767" attributes="0"/>
+                          <Component id="jtfIdReceitas" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jtfLabelCategoria" pref="96" max="32767" attributes="0"/>
+                                  <Component id="JcbCategoria" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jtfIdCategoria" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jtfLabelDespesa" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jtfLabelValor" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldValor" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Component id="jtfValor" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                           <Component id="jtfLabelDtLancamento" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jtfFormattedTextFieldDatadeLançamento" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Component id="jtfDtLançamento" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="600" max="32767" attributes="0"/>
                   </Group>
@@ -66,35 +70,38 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jtfLabelID" min="-2" pref="24" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jtfTextFieldID" min="-2" max="-2" attributes="0"/>
+              <Component id="jtfIdReceitas" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="4" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jtfLabelCategoria" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jtfComboBoxCategoria" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="JcbCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfIdCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator3" min="-2" pref="3" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jtfLabelDespesa" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jtfTextFieldDespesas" min="-2" pref="32" max="-2" attributes="0"/>
+              <Component id="jtfReceita" min="-2" pref="32" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator2" min="-2" pref="3" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jtfLabelValor" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTextFieldValor" min="-2" pref="32" max="-2" attributes="0"/>
+              <Component id="jtfValor" min="-2" pref="32" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator4" min="-2" pref="3" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jtfLabelDtLancamento" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jtfFormattedTextFieldDatadeLançamento" min="-2" max="-2" attributes="0"/>
+              <Component id="jtfDtLançamento" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="158" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jtfButtonSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtfButtonExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -102,9 +109,9 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="jtfTextFieldID">
+    <Component class="javax.swing.JTextField" name="jtfIdReceitas">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfTextFieldIDActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfIdReceitasActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jtfLabelID">
@@ -114,7 +121,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jtfLabelDespesa">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Despesa"/>
+        <Property name="text" type="java.lang.String" value="Receita"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jtfLabelValor">
@@ -122,14 +129,14 @@
         <Property name="text" type="java.lang.String" value="Valor"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jtfComboBoxCategoria">
+    <Component class="javax.swing.JComboBox" name="JcbCategoria">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfComboBoxCategoriaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JcbCategoriaActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -137,29 +144,32 @@
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator3">
     </Component>
-    <Component class="javax.swing.JTextField" name="jtfTextFieldDespesas">
+    <Component class="javax.swing.JTextField" name="jtfReceita">
     </Component>
     <Component class="javax.swing.JLabel" name="jtfLabelCategoria">
       <Properties>
         <Property name="text" type="java.lang.String" value="Categoria"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jtfFormattedTextFieldDatadeLan&#xe7;amento">
+    <Component class="javax.swing.JFormattedTextField" name="jtfDtLan&#xe7;amento">
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldValor">
+    <Component class="javax.swing.JTextField" name="jtfValor">
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator2">
     </Component>
-    <Component class="javax.swing.JButton" name="jtfButtonSalvar">
+    <Component class="javax.swing.JButton" name="btnSalvar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator4">
     </Component>
-    <Component class="javax.swing.JButton" name="jtfButtonExcluir">
+    <Component class="javax.swing.JButton" name="btnExcluir">
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir"/>
       </Properties>
@@ -168,6 +178,8 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Data de Lan&#xe7;amento"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfIdCategoria">
     </Component>
   </SubComponents>
 </Form>

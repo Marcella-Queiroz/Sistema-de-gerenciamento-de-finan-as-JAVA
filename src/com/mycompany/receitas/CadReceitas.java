@@ -4,7 +4,14 @@
  */
 package com.mycompany.receitas;
 
+import com.mycompany.dao.DaoReceitas;
 import com.mycompany.utilidades.Formularios;
+import com.mycompany.utilidades.DadosTemporarios;
+import com.mycompany.utilidades.Constantes;
+import com.mycompany.dao.DaoCategoria;
+import com.mycompany.modelo.ModReceitas;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,12 +19,113 @@ import com.mycompany.utilidades.Formularios;
  */
 public class CadReceitas extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadReceita
-     */
     public CadReceitas() {
         initComponents();
+        
+        if(!existeDadosTemporarios()){
+            DaoReceitas daoReceitas = new DaoReceitas();
+            
+            int id = daoReceitas.buscarProximoId();
+            if(id>=0)
+                jtfIdReceitas.setText(String.valueOf(id));
+            
+            btnSalvar.setText(Constantes.BTN_SALVAR_TEXT);
+            btnExcluir.setVisible(false);
+            jtfIdReceitas.setText(String.valueOf(daoReceitas.buscarProximoId()));
+            
+        }else{
+            btnSalvar.setText(Constantes.BTN_ALTERAR_TEXT);
+            btnExcluir.setVisible(true);
+        }   
+        DaoReceitas daoReceitas = new DaoReceitas();
+        
+        jtfIdReceitas.setEnabled(false);
+        
+        try{
+            ResultSet resultSet = new DaoReceitas().ListarTodos();
+        
+            while(resultSet.next()){
+                JcbCategoria.addItem(resultSet.getString("Nome"));
+                
+            }
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        jtfIdReceitas.setVisible(false);
     }
+    public Boolean existeDadosTemporarios(){
+        if (DadosTemporarios.tempObject instanceof ModReceitas){
+        int id =((ModReceitas)DadosTemporarios.tempObject).getId();
+        String nome = ((ModReceitas)DadosTemporarios.tempObject).getNome();
+        double valor = ((ModReceitas) DadosTemporarios.tempObject).getValor();
+        String data_de_lançamento = ((ModReceitas) DadosTemporarios.tempObject).getDataDeLançamento();
+        
+        
+        jtfIdReceitas.setText(String.valueOf(id));
+        jtfReceita.setText(nome);
+        jtfValor.setText(String.valueOf(valor));
+        jtfDtLançamento.setText(data_de_lançamento);
+        
+        
+        DadosTemporarios.tempObject = null;
+        return true;
+        
+        }else
+            return false;
+    }
+    private void inserir(){
+        DaoReceitas daoReceitas = new DaoReceitas();
+
+        int categoriaId = Integer.parseInt(jtfIdCategoria.getText());
+        String receitas =jtfReceita.getText();
+        Double valor = Double.valueOf(jtfValor.getText());
+        String Data_de_Lançamento = jtfDtLançamento.getText();
+        
+
+        if (daoReceitas.inserir(categoriaId,receitas , valor, Data_de_Lançamento)){
+            JOptionPane.showMessageDialog(null, "Novo tipo de depesa cadastrado! ");
+
+            jtfIdCategoria.setText(String.valueOf(daoReceitas.buscarProximoId()));
+            jtfReceita.setText("");
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar a despesa");
+          }
+    
+    }    
+    private void alterar(){
+            DaoReceitas daoReceitas = new DaoReceitas();
+            
+            if (daoReceitas.alterar(Integer.parseInt(jtfIdReceitas.getText()),Integer.parseInt(jtfIdCategoria.getText()), jtfReceita.getText(), Double.parseDouble(jtfValor.getText()), jtfDtLançamento.getText())){
+                JOptionPane.showMessageDialog(null, " Alterado com sucesso! ");
+                
+                jtfIdReceitas.setText("");
+                jtfReceita.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possivel excluir a despesa! ");
+        }
+            ((ListReceitas)Formularios.listReceitas).listarTodos();
+            
+            dispose();
+    }
+    private void excluir(){
+        DaoReceitas daoReceitas = new DaoReceitas();         
+        if (daoReceitas.excluir(Integer.parseInt(jtfIdReceitas.getText()))){
+            JOptionPane.showMessageDialog(null, "Despesa" + jtfReceita.getText() + " excluída com sucesso!");
+            
+            jtfIdReceitas.setText("");
+            jtfReceita.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possível excluir a !");
+        }
+        
+        ((ListReceitas) Formularios.listDespesas).listarTodos();
+        
+        dispose();
+        
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,22 +136,23 @@ public class CadReceitas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jtfTextFieldID = new javax.swing.JTextField();
+        jtfIdReceitas = new javax.swing.JTextField();
         jtfLabelID = new javax.swing.JLabel();
         jtfLabelDespesa = new javax.swing.JLabel();
         jtfLabelValor = new javax.swing.JLabel();
-        jtfComboBoxCategoria = new javax.swing.JComboBox<>();
+        JcbCategoria = new javax.swing.JComboBox<>();
         jSeparator3 = new javax.swing.JSeparator();
-        jtfTextFieldDespesas = new javax.swing.JTextField();
+        jtfReceita = new javax.swing.JTextField();
         jtfLabelCategoria = new javax.swing.JLabel();
-        jtfFormattedTextFieldDatadeLançamento = new javax.swing.JFormattedTextField();
+        jtfDtLançamento = new javax.swing.JFormattedTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextFieldValor = new javax.swing.JTextField();
+        jtfValor = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
-        jtfButtonSalvar = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
-        jtfButtonExcluir = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
         jtfLabelDtLancamento = new javax.swing.JLabel();
+        jtfIdCategoria = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -52,29 +161,34 @@ public class CadReceitas extends javax.swing.JFrame {
             }
         });
 
-        jtfTextFieldID.addActionListener(new java.awt.event.ActionListener() {
+        jtfIdReceitas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfTextFieldIDActionPerformed(evt);
+                jtfIdReceitasActionPerformed(evt);
             }
         });
 
         jtfLabelID.setText("ID");
 
-        jtfLabelDespesa.setText("Despesa");
+        jtfLabelDespesa.setText("Receita");
 
         jtfLabelValor.setText("Valor");
 
-        jtfComboBoxCategoria.addActionListener(new java.awt.event.ActionListener() {
+        JcbCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfComboBoxCategoriaActionPerformed(evt);
+                JcbCategoriaActionPerformed(evt);
             }
         });
 
         jtfLabelCategoria.setText("Categoria");
 
-        jtfButtonSalvar.setText("Salvar");
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
-        jtfButtonExcluir.setText("Excluir");
+        btnExcluir.setText("Excluir");
 
         jtfLabelDtLancamento.setText("Data de Lançamento");
 
@@ -87,25 +201,28 @@ public class CadReceitas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1)
                     .addComponent(jSeparator3)
-                    .addComponent(jtfTextFieldDespesas)
+                    .addComponent(jtfReceita)
                     .addComponent(jSeparator2)
                     .addComponent(jSeparator4)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtfButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jtfLabelID, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jtfLabelCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                                .addComponent(jtfComboBoxCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jtfIdReceitas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfLabelCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                                    .addComponent(JcbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfIdCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jtfLabelDespesa)
                             .addComponent(jtfLabelValor)
-                            .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfLabelDtLancamento)
-                            .addComponent(jtfFormattedTextFieldDatadeLançamento, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfDtLançamento, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 600, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -115,52 +232,70 @@ public class CadReceitas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jtfLabelID, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfIdReceitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfLabelCategoria)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JcbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfIdCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfLabelDespesa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfTextFieldDespesas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfLabelValor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfLabelDtLancamento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfFormattedTextFieldDatadeLançamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfDtLançamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfButtonSalvar)
-                    .addComponent(jtfButtonExcluir))
+                    .addComponent(btnSalvar)
+                    .addComponent(btnExcluir))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfComboBoxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfComboBoxCategoriaActionPerformed
+    private void JcbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JcbCategoriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtfComboBoxCategoriaActionPerformed
+    }//GEN-LAST:event_JcbCategoriaActionPerformed
 
-    private void jtfTextFieldIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTextFieldIDActionPerformed
+    private void jtfIdReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfIdReceitasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtfTextFieldIDActionPerformed
+    }//GEN-LAST:event_jtfIdReceitasActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         Formularios.cadReceitas = null;
     }//GEN-LAST:event_formWindowClosed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+      // DaoReceitas daoReceitas = new DaoReceitas();
+        
+       // if(btnSalvar.getText() == Constantes.BTN_SALVAR_TEXT){
+           // inserir();
+            
+          //jtfIdReceitas.setText(String.valueOf(daoReceitas.buscarProximoId());
+         //  jtfReceita.setText("");            
+      //  }else if (btnSalvar.getText() == Constantes.BTN_ALTERAR_TEXT){
+           //  alterar();
+            //((ListReceitas) Formularios.listReceitas).listarTodos();
+           //dispose();
+       // }
+    //}                                         
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,21 +334,22 @@ public class CadReceitas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> JcbCategoria;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTextField jTextFieldValor;
-    private javax.swing.JButton jtfButtonExcluir;
-    private javax.swing.JButton jtfButtonSalvar;
-    private javax.swing.JComboBox<String> jtfComboBoxCategoria;
-    private javax.swing.JFormattedTextField jtfFormattedTextFieldDatadeLançamento;
+    private javax.swing.JFormattedTextField jtfDtLançamento;
+    private javax.swing.JTextField jtfIdCategoria;
+    private javax.swing.JTextField jtfIdReceitas;
     private javax.swing.JLabel jtfLabelCategoria;
     private javax.swing.JLabel jtfLabelDespesa;
     private javax.swing.JLabel jtfLabelDtLancamento;
     private javax.swing.JLabel jtfLabelID;
     private javax.swing.JLabel jtfLabelValor;
-    private javax.swing.JTextField jtfTextFieldDespesas;
-    private javax.swing.JTextField jtfTextFieldID;
+    private javax.swing.JTextField jtfReceita;
+    private javax.swing.JTextField jtfValor;
     // End of variables declaration//GEN-END:variables
 }

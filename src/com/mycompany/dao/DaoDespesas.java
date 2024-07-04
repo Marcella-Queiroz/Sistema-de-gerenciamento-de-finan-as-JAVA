@@ -108,7 +108,7 @@ public ResultSet ListarTodos(){
             getStatement().setString(2, Despesas);
             getStatement().setFloat(3, Valor);
             getStatement().setString(4, Vencimento);
-            getStatement().setString(5, Pagamento);
+//            getStatement().setString(5, Pagamento);
             
             if(Vencimento.equals("")){
                 getStatement().setNull(4, Types.DATE);
@@ -116,7 +116,7 @@ public ResultSet ListarTodos(){
                 getStatement().setString(4, Vencimento);
             }
         
-            if(Vencimento.equals("")){
+            if(Pagamento.equals("")){
                 getStatement().setNull(5, Types.DATE);
             }else{
                 getStatement().setString(5, Pagamento);

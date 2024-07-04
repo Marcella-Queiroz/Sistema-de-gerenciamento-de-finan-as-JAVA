@@ -30,7 +30,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jtfFiltrar1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jtfTextField1" max="32767" attributes="0"/>
+                      <Component id="jtfFiltro" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jtfButtonBuscar1" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -49,7 +49,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jtfFiltrar1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtfTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfFiltro" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jtfButtonBuscar1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -77,12 +77,15 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="jtfTextField1">
+    <Component class="javax.swing.JTextField" name="jtfFiltro">
     </Component>
     <Component class="javax.swing.JButton" name="jtfButtonBuscar1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfButtonBuscar1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jtfLabelRegistro1">
       <Properties>
@@ -96,20 +99,20 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="TableReceita">
+        <Component class="javax.swing.JTable" name="tableReceitas">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="5" rowCount="4">
-                <Column editable="true" title="ID" type="java.lang.Object"/>
-                <Column editable="true" title="Categoria" type="java.lang.Object"/>
-                <Column editable="true" title="Despesa" type="java.lang.Object"/>
-                <Column editable="true" title="Valor" type="java.lang.Object"/>
-                <Column editable="true" title="Data de lan&#xe7;amento" type="java.lang.Object"/>
+                <Column editable="false" title="ID" type="java.lang.Object"/>
+                <Column editable="false" title="Categoria" type="java.lang.Object"/>
+                <Column editable="false" title="Despesa" type="java.lang.Object"/>
+                <Column editable="false" title="Valor" type="java.lang.Object"/>
+                <Column editable="false" title="Data de lan&#xe7;amento" type="java.lang.Object"/>
               </Table>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TableReceitaMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableReceitasMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>

@@ -169,7 +169,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 if (Formularios.listReceitas == null)
                     Formularios.listReceitas = new ListReceitas();
                 
-                Formularios.listDespesas.setVisible(true);
+                Formularios.listReceitas.setVisible(true);
                 
                 break;                
             case 2:

@@ -39,7 +39,7 @@ public class CadDespesas extends javax.swing.JFrame {
         jtfIdDespesas.setEnabled(false);
         
         try{
-            ResultSet resultSet = new DaoCategoria().listarTodos(2);
+            ResultSet resultSet = new DaoCategoria().listarTodosPorIdCategoria(2);
         
             while(resultSet.next()){
                 jcbCategoria.addItem(resultSet.getString("Nome"));
@@ -194,6 +194,12 @@ public class CadDespesas extends javax.swing.JFrame {
 
         jtfLabelCategoria.setText("Categoria");
 
+        jtfIdCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfIdCategoriaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -322,6 +328,10 @@ public class CadDespesas extends javax.swing.JFrame {
         if(escolha == JOptionPane.YES_OPTION)
             excluir();                        
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void jtfIdCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfIdCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfIdCategoriaActionPerformed
     
     
     public static void main(String args[]) {

@@ -4,7 +4,6 @@
  */
 package com.mycompany.despesas;
 
-import com.mycompany.dao.DaoDespesas;
 import javax.swing.table.DefaultTableModel;
 import com.mycompany.dao.DaoDespesas;
 import java.sql.ResultSet;
@@ -13,15 +12,9 @@ import com.mycompany.modelo.ModDespesas;
 import com.mycompany.utilidades.DadosTemporarios;
 import com.mycompany.utilidades.Formularios;
 import javax.swing.JFrame;
-/**
- *
- * @author marcella.1963
- */
+
 public class ListDespesas extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ListDespesa
-     */
     public ListDespesas() {
         initComponents();
         
@@ -250,7 +243,7 @@ public class ListDespesas extends javax.swing.JFrame {
         case 2:
             listarPorNome(jtfFiltro.getText());
             break;
-        }        // TODO add your handling code here:
+        }      
     }//GEN-LAST:event_jtfButtonBuscar1ActionPerformed
 
     private void tableDespesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDespesasMouseClicked
@@ -261,9 +254,18 @@ public class ListDespesas extends javax.swing.JFrame {
             modDespesas.setCategoriaId(Integer.parseInt(String.valueOf(tableDespesas.getValueAt(tableDespesas.getSelectedRow(), 1))));
             modDespesas.setNome(String.valueOf(tableDespesas.getValueAt(tableDespesas.getSelectedRow(), 2)));
             modDespesas.setValor(Float.parseFloat(String.valueOf(tableDespesas.getValueAt(tableDespesas.getSelectedRow(), 3))));
-            modDespesas.setVencimento(String.valueOf(tableDespesas.getValueAt(tableDespesas.getSelectedRow(), 4)));
-            modDespesas.setPagamento(String.valueOf(tableDespesas.getValueAt(tableDespesas.getSelectedRow(), 5)));
+           /* 
+            String dataVencimento = String.valueOf(tableDespesas.getValueAt(tableDespesas.getSelectedRow(), 4)));
+            String dataPagamento = String.valueOf(tableDespesas.getValueAt(tableDespesas.getSelectedRow(), 5)));
             
+     
+           
+            if( dataVencimento== "null"){
+                modDespesas.setdata("");
+            }else{
+                modDespesas.setDataDeLançamento(String.valueOf(tableDespesas.getValueAt(tableDespesas.getSelectedRow(), 4)));
+            }
+            */
             DadosTemporarios.tempObject = (ModDespesas) modDespesas;
             
             if(Formularios.cadDespesas == null){

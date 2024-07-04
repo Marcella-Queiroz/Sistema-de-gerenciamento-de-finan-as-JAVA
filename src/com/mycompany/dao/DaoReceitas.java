@@ -5,10 +5,10 @@ import java.sql.ResultSet;
 import java.sql.Types;
 public class DaoReceitas extends BancoDeDadosMySql {
     private String sql;
-    public Boolean inserir(int categoriaId, String Nome, Double Valor, String Data_de_Lançamento){
     
-    try{
-    sql = "INSERT INTO RECEITAS (CATEGORIA_ID, NOME, VALOR, DATA_DE_VENCIMENTO) VALUES (?,?,?,?,)";
+    public Boolean inserir(int categoriaId, String Nome, Double Valor, String Data_de_Lançamento){
+        try{
+        sql = "INSERT INTO RECEITAS (CATEGORIA_ID, NOME, VALOR, DATA_DE_LANCAMENTO) VALUES (?,?,?,?)";
     
         setStatement(getConexao().prepareCall(sql));
         
@@ -24,8 +24,9 @@ public class DaoReceitas extends BancoDeDadosMySql {
             getStatement().setString(4, Data_de_Lançamento);
         }
         
-        getStatement().executeQuery();
+        getStatement().executeUpdate();
         
+        return true;
     }catch(Exception e){
         System.err.println(e.getLocalizedMessage());
     }
@@ -52,7 +53,7 @@ public class DaoReceitas extends BancoDeDadosMySql {
         }
     public ResultSet ListarTodos(){
     try{
-    sql = "SELECT ID, CATEGORIA_ID, NOME, VALOR, DATA_DE_LANAMENTO FROM RECEITAS";
+    sql = "SELECT ID, CATEGORIA_ID, NOME, VALOR, DATA_DE_LANCAMENTO FROM RECEITAS";
     
     setStatement(getConexao().prepareCall(sql));
     
@@ -93,15 +94,13 @@ public class DaoReceitas extends BancoDeDadosMySql {
 }
     public Boolean alterar(int ID, int Categoria_id, String Nome, Double Valor, String Data_de_Lançamento ){
         try{
-            sql = "UPDATE RECEITAS SET CATEGORIA_ID = ?, NOME = ?, VALOR = ?, DATA_DE_LANÇAMENTO WHERE ID = ?";
+            sql = "UPDATE RECEITAS SET CATEGORIA_ID = ?, NOME = ?, VALOR = ?, DATA_DE_LANCAMENTO = ? WHERE ID = ?";
             
             setStatement(getConexao().prepareStatement(sql));
             getStatement().setInt(5,ID);
             getStatement().setInt(1, Categoria_id);
             getStatement().setString(2, Nome);
             getStatement().setDouble(3, Valor);
-            getStatement().setString(4, Data_de_Lançamento);
-            
             
             if(Data_de_Lançamento.equals("")){
                 getStatement().setNull(4, Types.DATE);
@@ -109,6 +108,7 @@ public class DaoReceitas extends BancoDeDadosMySql {
                 getStatement().setString(4, Data_de_Lançamento);
             }
 
+            
             getStatement().executeUpdate();
             
             return true;

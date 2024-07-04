@@ -37,9 +37,9 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnSalvar" min="-2" pref="78" max="-2" attributes="0"/>
+                              <Component id="btnSalvar2" min="-2" pref="78" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnExcluir" min="-2" pref="80" max="-2" attributes="0"/>
+                              <Component id="btnExcluir2" min="-2" pref="80" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jtfLabelID" alignment="0" min="-2" pref="21" max="-2" attributes="0"/>
                           <Component id="jtfIdReceitas" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
@@ -100,8 +100,8 @@
               <Component id="jtfDtLançamento" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="158" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSalvar2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnExcluir2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -136,6 +136,7 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="JcbCategoriaItemStateChanged"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JcbCategoriaActionPerformed"/>
       </Events>
       <AuxValues>
@@ -159,20 +160,23 @@
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator2">
     </Component>
-    <Component class="javax.swing.JButton" name="btnSalvar">
+    <Component class="javax.swing.JButton" name="btnSalvar2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvar2ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator4">
     </Component>
-    <Component class="javax.swing.JButton" name="btnExcluir">
+    <Component class="javax.swing.JButton" name="btnExcluir2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluir2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jtfLabelDtLancamento">
       <Properties>
@@ -180,6 +184,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfIdCategoria">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfIdCategoriaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

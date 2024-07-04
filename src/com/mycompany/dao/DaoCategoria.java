@@ -14,7 +14,21 @@ import java.sql.ResultSet;
 public class DaoCategoria extends BancoDeDadosMySql{
     String sql;
     
-    public ResultSet listarTodos(int idTipoCategoria){
+    public ResultSet listarTodos(){
+        try{
+            sql = "SELECT * FROM CATEGORIA";
+
+            setStatement(getConexao().prepareStatement(sql));
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return getResultado();
+    }
+    
+    public ResultSet listarTodosPorIdCategoria(int idTipoCategoria){
         try{
             sql = "SELECT * FROM CATEGORIA WHERE TIPO_CATEGORIA = ?";
 

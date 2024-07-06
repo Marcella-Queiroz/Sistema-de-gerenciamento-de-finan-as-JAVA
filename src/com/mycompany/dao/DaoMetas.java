@@ -13,17 +13,16 @@ import java.sql.ResultSet;
 public class DaoMetas extends BancoDeDadosMySql {
     private String sql;
     
-    public Boolean inserir(String metas, Double valor, String descricao, String data_inicial, String data_final){
+    public Boolean inserir(String metas, Double valor, String data_inicial){
     try{
-        sql = "INSERT INTO METAS (NOME, VALOR, DESCRICAO, DATA_INICIAL, DATA_FINAL) VALUES (?,?,?,?,?)";
+        sql = "INSERT INTO METAS (NOME, VALOR, DATA_INICIAL) VALUES (?,?,?)";
         
          setStatement(getConexao().prepareStatement(sql));
          
          getStatement().setString(1, metas);
          getStatement().setDouble(2, valor);
-         getStatement().setString(3, descricao);
          getStatement().setString(4, data_inicial);
-         getStatement().setString(5, data_final);
+         
          
          getStatement().executeUpdate();
          
@@ -55,7 +54,7 @@ public class DaoMetas extends BancoDeDadosMySql {
     }
 public ResultSet ListarTodos(){
     try{
-        sql = "SELECT ID, NOME, VALOR, DESCRICAO, DATA_INICIAL, DATA_FINAL FROM METAS";
+        sql = "SELECT ID, NOME, VALOR, DATA_INICIAL FROM METAS";
 
         setStatement(getConexao().prepareStatement(sql));
         
@@ -94,17 +93,16 @@ public ResultSet ListarTodos(){
     }
     return getResultado();
     }
-    public Boolean alterar(int ID, String nome, Double valor, String descricao, String data_inicial, String data_final ){
+    public Boolean alterar(int ID, String nome, Double valor, String data_inicial ){
         try{
-            sql = "UPDATE METAS SET NOME = ?, VALOR = ?, DESCRICAO = ?,DATA_INICIAL = ?, DATA_FINAL = ? WHERE ID = ?";
+            sql = "UPDATE METAS SET NOME = ?, VALOR = ?,DATA_INICIAL = ? WHERE ID = ?";
             
             setStatement(getConexao().prepareStatement(sql));
             getStatement().setInt(6,ID);
             getStatement().setString(1, nome);
             getStatement().setDouble(2, valor);
-            getStatement().setString(3, descricao);
             getStatement().setString(4, data_inicial);
-            getStatement().setString(5, data_final);
+            
             
             getStatement().executeUpdate();
             

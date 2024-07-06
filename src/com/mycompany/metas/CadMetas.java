@@ -77,11 +77,10 @@ public class CadMetas extends javax.swing.JFrame {
 
             String nomeMetas = jtfMetas.getText();
             Double valor = Double.valueOf(jTextFieldValor.getText());
-            String descricao = jtfDescricao.getText();
             String dtInicial = jfDtInicial.getText();
-            String dtFinal = jfDtFinal.getText();
             
-            if(daoMetas.inserir(nomeMetas, valor, descricao, dtInicial, dtFinal)){
+            
+            /*if(daoMetas.inserir(nomeMetas, valor, dtInicial)){
                 JOptionPane.showMessageDialog(null, "Novo tipo de Metas cadastrado com sucesso.");
 
                 jtfIdMetas.setText(String.valueOf(daoMetas.buscarProximoID()));
@@ -89,15 +88,15 @@ public class CadMetas extends javax.swing.JFrame {
             }else{
                 JOptionPane.showMessageDialog(null, "Erro ao cadastrar o tipo de Metas.");
             }
-        }
+        }*/
     
-    
+    }
         private void alterar(){
         DaoMetas daoMetas = new DaoMetas();
         
            
             
-        if(daoMetas.alterar(Integer.parseInt(jtfIdMetas.getText()), jtfMetas.getText(), Double.parseDouble(jTextFieldValor.getText()), jtfDescricao.getText(), jfDtInicial.getText(), jfDtFinal.getText())){
+        /*if(daoMetas.alterar(Integer.parseInt(jtfIdMetas.getText()), jtfMetas.getText(), Double.parseDouble(jTextFieldValor.getText()), jtfDescricao.getText(), jfDtInicial.getText(), jfDtFinal.getText())){
 
             JOptionPane.showMessageDialog(null, "Categoria alterada com sucesso!");
             
@@ -105,7 +104,7 @@ public class CadMetas extends javax.swing.JFrame {
             jtfMetas.setText("");
         }else{
             JOptionPane.showMessageDialog(null, "Não foi possível alterar a categoria!");
-        }
+        }*/
         
         ((ListMetas) Formularios.listMetas).listarTodos();
         
@@ -134,24 +133,28 @@ public class CadMetas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jTextFieldValor = new javax.swing.JTextField();
-        jSeparator2 = new javax.swing.JSeparator();
         btnSalvar = new javax.swing.JButton();
-        jSeparator4 = new javax.swing.JSeparator();
         btnExcluir = new javax.swing.JButton();
-        jtfLabelDtLancamento = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtfDescricao = new javax.swing.JTextArea();
         jfDtInicial = new javax.swing.JFormattedTextField();
         jtfIdMetas = new javax.swing.JTextField();
         jtfLabelID = new javax.swing.JLabel();
-        jfDtFinal = new javax.swing.JFormattedTextField();
         jtfLabelDespesa = new javax.swing.JLabel();
         jtfLabelValor = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jtfMetas = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jtfMetas1 = new javax.swing.JTextField();
+        jtfLabelDespesa1 = new javax.swing.JLabel();
+
+        jLabel1.setBackground(new java.awt.Color(80, 82, 84));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("Gerenciamento de Contas");
+
+        jSeparator1.setBackground(new java.awt.Color(80, 82, 84));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -174,12 +177,6 @@ public class CadMetas extends javax.swing.JFrame {
             }
         });
 
-        jtfLabelDtLancamento.setText("Descrição");
-
-        jtfDescricao.setColumns(20);
-        jtfDescricao.setRows(5);
-        jScrollPane1.setViewportView(jtfDescricao);
-
         jtfIdMetas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfIdMetasActionPerformed(evt);
@@ -188,86 +185,93 @@ public class CadMetas extends javax.swing.JFrame {
 
         jtfLabelID.setText("ID");
 
-        jtfLabelDespesa.setText("Metas");
+        jtfLabelDespesa.setText("Qual é seu objetivo com essa meta?");
 
-        jtfLabelValor.setText("Valor");
-
-        jLabel7.setText("Data Final");
+        jtfLabelValor.setText("Em quantos meses você deseja alcançar essa meta?");
 
         jLabel8.setText("Data Inicial");
+
+        jtfMetas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfMetasActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setBackground(new java.awt.Color(80, 82, 84));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Gerenciamento de Contas");
+
+        jSeparator2.setBackground(new java.awt.Color(80, 82, 84));
+
+        jtfMetas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfMetas1ActionPerformed(evt);
+            }
+        });
+
+        jtfLabelDespesa1.setText("Valor");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSeparator4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jtfLabelValor)
-                    .addComponent(jtfLabelDespesa)
-                    .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfLabelDtLancamento)
-                    .addComponent(jtfLabelID, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfIdMetas, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                    .addComponent(jtfMetas)
-                    .addComponent(jSeparator2)
-                    .addComponent(jSeparator1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfMetas, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfLabelDespesa)
+                            .addComponent(jtfLabelID, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfIdMetas, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfLabelValor)
+                            .addComponent(jLabel8)
+                            .addComponent(jfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfLabelDespesa1)
+                            .addComponent(jtfMetas1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfLabelID, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfIdMetas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jtfIdMetas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jtfLabelDespesa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfMetas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jtfLabelDespesa1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtfMetas1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jtfLabelValor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfLabelDtLancamento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnExcluir))
-                .addGap(31, 31, 31))
+                .addGap(41, 41, 41))
         );
 
         pack();
@@ -307,6 +311,14 @@ public class CadMetas extends javax.swing.JFrame {
             excluir();                        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    private void jtfMetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfMetasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfMetasActionPerformed
+
+    private void jtfMetas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfMetas1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfMetas1ActionPerformed
+
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -344,21 +356,19 @@ public class CadMetas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextField jTextFieldValor;
-    private javax.swing.JFormattedTextField jfDtFinal;
     private javax.swing.JFormattedTextField jfDtInicial;
-    private javax.swing.JTextArea jtfDescricao;
     private javax.swing.JTextField jtfIdMetas;
     private javax.swing.JLabel jtfLabelDespesa;
-    private javax.swing.JLabel jtfLabelDtLancamento;
+    private javax.swing.JLabel jtfLabelDespesa1;
     private javax.swing.JLabel jtfLabelID;
     private javax.swing.JLabel jtfLabelValor;
     private javax.swing.JTextField jtfMetas;
+    private javax.swing.JTextField jtfMetas1;
     // End of variables declaration//GEN-END:variables
 }

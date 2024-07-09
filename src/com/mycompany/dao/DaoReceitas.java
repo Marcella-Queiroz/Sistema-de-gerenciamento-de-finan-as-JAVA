@@ -3,6 +3,8 @@ package com.mycompany.dao;
 import com.mycompany.utilidades.BancoDeDadosMySql;
 import java.sql.ResultSet;
 import java.sql.Types;
+
+
 public class DaoReceitas extends BancoDeDadosMySql {
     private String sql;
     

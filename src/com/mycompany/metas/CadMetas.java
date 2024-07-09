@@ -4,20 +4,14 @@
  */
 package com.mycompany.metas;
 
-import com.mycompany.dao.DaoMetas;
-import com.mycompany.dao.DaoTipoCategoria;
 import com.mycompany.modelo.ModMetas;
+import com.mycompany.dao.DaoMetas;
 import com.mycompany.utilidades.Constantes;
 import com.mycompany.utilidades.DadosTemporarios;
-import javax.swing.JOptionPane;
-import com.mycompany.dao.DaoMetas;
 import com.mycompany.utilidades.Formularios;
+import javax.swing.JOptionPane;
 
 
-/**
- *
- * @author marcella.1963
- */
 public class CadMetas extends javax.swing.JFrame {
 
     public CadMetas() {
@@ -49,22 +43,16 @@ public class CadMetas extends javax.swing.JFrame {
         int id =((ModMetas) DadosTemporarios.tempObject).getId();
         String nome = ((ModMetas) DadosTemporarios.tempObject).getNome();
         float Valor = ((ModMetas) DadosTemporarios.tempObject).getValor();
-        String Descricao = ((ModMetas) DadosTemporarios.tempObject).getDescricao();
+        int meses = ((ModMetas) DadosTemporarios.tempObject).getMeses();
         String DataInicial = ((ModMetas) DadosTemporarios.tempObject).getDataInicial();
-        String DataFinal = ((ModMetas) DadosTemporarios.tempObject).getDataFinal();
         
         
         jtfIdMetas.setText(String.valueOf(id));
-        jtfMetas.setText(nome);
-        jTextFieldValor.setText(String.valueOf(Valor));
-        jtfDescricao.setText(Descricao);
+        jtfNome.setText(nome);
+        jtfValor.setText(String.valueOf(Valor));
+        jtfMeses.setText(String.valueOf(meses));
         jfDtInicial.setText(DataInicial);
-        jfDtFinal.setText(DataFinal);
-        
-        
-        
-        
-
+       
         DadosTemporarios.tempObject = null;
 
         return true;
@@ -75,51 +63,52 @@ public class CadMetas extends javax.swing.JFrame {
     private void inserir(){
             DaoMetas daoMetas = new DaoMetas();
 
-            String nomeMetas = jtfMetas.getText();
-            Double valor = Double.valueOf(jTextFieldValor.getText());
+            String nome = jtfNome.getText();
+            Double valor = Double.valueOf(jtfValor.getText());
+            int meses = Integer.parseInt(jtfMeses.getText());
             String dtInicial = jfDtInicial.getText();
             
-            
-            /*if(daoMetas.inserir(nomeMetas, valor, dtInicial)){
+
+            if(daoMetas.inserir(nome, valor, meses,dtInicial)){
                 JOptionPane.showMessageDialog(null, "Novo tipo de Metas cadastrado com sucesso.");
 
                 jtfIdMetas.setText(String.valueOf(daoMetas.buscarProximoID()));
-                jtfMetas.setText("");
+                jtfNome.setText("");
+                jtfValor.setText("");
+                jtfMeses.setText("");
+                jfDtInicial.setText("");
             }else{
                 JOptionPane.showMessageDialog(null, "Erro ao cadastrar o tipo de Metas.");
             }
-        }*/
+        }
     
-    }
-        private void alterar(){
+    private void alterar(){
         DaoMetas daoMetas = new DaoMetas();
-        
-           
-            
-        /*if(daoMetas.alterar(Integer.parseInt(jtfIdMetas.getText()), jtfMetas.getText(), Double.parseDouble(jTextFieldValor.getText()), jtfDescricao.getText(), jfDtInicial.getText(), jfDtFinal.getText())){
 
+        if(daoMetas.alterar(Integer.parseInt(jtfIdMetas.getText()), jtfNome.getText(), Double.parseDouble(jtfValor.getText()), Integer.parseInt(jtfMeses.getText()), jfDtInicial.getText())){
+        
             JOptionPane.showMessageDialog(null, "Categoria alterada com sucesso!");
             
             jtfIdMetas.setText("");
-            jtfMetas.setText("");
+            jtfNome.setText("");
         }else{
-            JOptionPane.showMessageDialog(null, "Não foi possível alterar a categoria!");
-        }*/
+            JOptionPane.showMessageDialog(null, "Não foi possível alterar a meta!");
+        }
         
         ((ListMetas) Formularios.listMetas).listarTodos();
         
       
-      dispose();
+        dispose();
     }
     
         private void excluir(){
         DaoMetas daoMetas = new DaoMetas();
         
         if (daoMetas.excluir(Integer.parseInt(jtfIdMetas.getText()))){
-            JOptionPane.showMessageDialog(null, "Meta" + jtfMetas.getText() + " excluída com sucesso!");
+            JOptionPane.showMessageDialog(null, "Meta" + jtfNome.getText() + " excluída com sucesso!");
             
             jtfIdMetas.setText("");
-            jtfMetas.setText("");
+            jtfNome.setText("");
         }else{
             JOptionPane.showMessageDialog(null, "Não foi possível excluir a !");
         }
@@ -135,7 +124,7 @@ public class CadMetas extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextFieldValor = new javax.swing.JTextField();
+        jtfMeses = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         jfDtInicial = new javax.swing.JFormattedTextField();
@@ -144,11 +133,13 @@ public class CadMetas extends javax.swing.JFrame {
         jtfLabelDespesa = new javax.swing.JLabel();
         jtfLabelValor = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jtfMetas = new javax.swing.JTextField();
+        jtfNome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jtfMetas1 = new javax.swing.JTextField();
+        jtfValor = new javax.swing.JTextField();
         jtfLabelDespesa1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         jLabel1.setBackground(new java.awt.Color(80, 82, 84));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -191,9 +182,9 @@ public class CadMetas extends javax.swing.JFrame {
 
         jLabel8.setText("Data Inicial");
 
-        jtfMetas.addActionListener(new java.awt.event.ActionListener() {
+        jtfNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfMetasActionPerformed(evt);
+                jtfNomeActionPerformed(evt);
             }
         });
 
@@ -203,13 +194,18 @@ public class CadMetas extends javax.swing.JFrame {
 
         jSeparator2.setBackground(new java.awt.Color(80, 82, 84));
 
-        jtfMetas1.addActionListener(new java.awt.event.ActionListener() {
+        jtfValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfMetas1ActionPerformed(evt);
+                jtfValorActionPerformed(evt);
             }
         });
 
         jtfLabelDespesa1.setText("Valor");
+
+        jLabel3.setText("meses");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("R$");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -224,7 +220,11 @@ public class CadMetas extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfMetas, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -232,12 +232,14 @@ public class CadMetas extends javax.swing.JFrame {
                             .addComponent(jtfLabelDespesa)
                             .addComponent(jtfLabelID, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfIdMetas, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jtfMeses, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3))
                             .addComponent(jtfLabelValor)
                             .addComponent(jLabel8)
                             .addComponent(jfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfLabelDespesa1)
-                            .addComponent(jtfMetas1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jtfLabelDespesa1))))
                 .addContainerGap(163, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -254,15 +256,20 @@ public class CadMetas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jtfLabelDespesa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfMetas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jtfLabelDespesa1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfMetas1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(jtfLabelValor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jtfLabelValor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtfMeses, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -288,13 +295,14 @@ public class CadMetas extends javax.swing.JFrame {
             inserir();
             
             jtfIdMetas.setText(String.valueOf(daoMetas.buscarProximoID()));
-            jtfMetas.setText("");
+            jtfNome.setText("");
             
         }else if (btnSalvar.getText() == Constantes.BTN_ALTERAR_TEXT){
              alterar();
             ((ListMetas) Formularios.listMetas).listarTodos();
             dispose();
-        }
+    }
+
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -305,19 +313,19 @@ public class CadMetas extends javax.swing.JFrame {
         int escolha = 
                 JOptionPane.showConfirmDialog(
                         null, 
-                        "Deseja realmente excluir a categoria " + jtfMetas.getText() + "?");
+                        "Deseja realmente excluir a categoria " + jtfNome.getText() + "?");
         
         if(escolha == JOptionPane.YES_OPTION)
             excluir();                        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void jtfMetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfMetasActionPerformed
+    private void jtfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtfMetasActionPerformed
+    }//GEN-LAST:event_jtfNomeActionPerformed
 
-    private void jtfMetas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfMetas1ActionPerformed
+    private void jtfValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfValorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtfMetas1ActionPerformed
+    }//GEN-LAST:event_jtfValorActionPerformed
 
 
     public static void main(String args[]) {
@@ -358,17 +366,19 @@ public class CadMetas extends javax.swing.JFrame {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextFieldValor;
     private javax.swing.JFormattedTextField jfDtInicial;
     private javax.swing.JTextField jtfIdMetas;
     private javax.swing.JLabel jtfLabelDespesa;
     private javax.swing.JLabel jtfLabelDespesa1;
     private javax.swing.JLabel jtfLabelID;
     private javax.swing.JLabel jtfLabelValor;
-    private javax.swing.JTextField jtfMetas;
-    private javax.swing.JTextField jtfMetas1;
+    private javax.swing.JTextField jtfMeses;
+    private javax.swing.JTextField jtfNome;
+    private javax.swing.JTextField jtfValor;
     // End of variables declaration//GEN-END:variables
 }

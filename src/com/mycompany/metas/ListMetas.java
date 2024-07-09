@@ -39,15 +39,15 @@ public class ListMetas extends javax.swing.JFrame {
             ResultSet resultSet= daoMetas.ListarTodos();
             
             defaultTableModel.setRowCount(0);
-            while(resultSet.next()){
+            while (resultSet.next()){  
                 String id = resultSet.getString(1);
                 String nome = resultSet.getString(2);
                 Double valor = resultSet.getDouble(3);
-                String descricao = resultSet.getString(4);
+                String meses = resultSet.getString(4);
                 String data_inicial = resultSet.getString(5);
-                String data_final = resultSet.getString(6);
+                Double valor_depositado = resultSet.getDouble(6);
                 
-                defaultTableModel.addRow(new Object []{id, nome, valor, descricao, data_inicial, data_final});
+                defaultTableModel.addRow(new Object []{id, nome, valor, meses, data_inicial, valor_depositado});
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -66,13 +66,13 @@ public class ListMetas extends javax.swing.JFrame {
             defaultTableModel.setRowCount(0);
             while (resultSet.next()){  
                 String id = resultSet.getString(1);
-                String metas = resultSet.getString(2);
+                String nome = resultSet.getString(2);
                 Double valor = resultSet.getDouble(3);
-                String descricao = resultSet.getString(4);
-                String data_inicial = resultSet.getString(5);
-                String data_final = resultSet.getString(6);
+                String meses = resultSet.getString(4);
+                String data_inicial = resultSet.getString(5);      
+                Double valor_depositado = resultSet.getDouble(6);
                 
-                defaultTableModel.addRow(new Object []{id, metas, valor, descricao, data_inicial, data_final});
+                defaultTableModel.addRow(new Object []{id, nome, valor, meses, data_inicial, valor_depositado});
             }
             
         }catch(Exception e){
@@ -92,13 +92,13 @@ public class ListMetas extends javax.swing.JFrame {
             defaultTableModel.setRowCount(0);
             while(resultSet.next()){
                 String id = resultSet.getString(1);
-                String metas = resultSet.getString(2);
+                String nome = resultSet.getString(2);
                 Double valor = resultSet.getDouble(3);
-                String descricao = resultSet.getString(4);
+                String meses = resultSet.getString(4);
                 String data_inicial = resultSet.getString(5);
-                String data_final = resultSet.getString(6);
+                Double valor_depositado = resultSet.getDouble(6);
 
-                defaultTableModel.addRow(new Object[]{id,metas, valor, descricao, data_inicial, data_final});
+                defaultTableModel.addRow(new Object[]{id, nome, valor, meses, data_inicial, valor_depositado});
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -127,11 +127,11 @@ public class ListMetas extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Valor", "Descrição", "Data Inicial", "Data Final"
+                "ID", "Nome", "Valor", "Meses", "Data Inicial", "Valor Depositado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -168,12 +168,14 @@ public class ListMetas extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jcbFiltro, 0, 48, Short.MAX_VALUE)
+                        .addComponent(jcbFiltro, 0, 86, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtfFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jtfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +188,8 @@ public class ListMetas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -198,10 +201,10 @@ public class ListMetas extends javax.swing.JFrame {
             
             modMetas.setId(Integer.parseInt(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 0))));
             modMetas.setNome(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 1)));
-            modMetas.setValor(Float.parseFloat(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 2))));            
-            modMetas.setDescricao(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 3)));
+            modMetas.setValor(Float.parseFloat(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 2))));
+            modMetas.setMeses(Integer.parseInt(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 3))));
             modMetas.setDataInicial(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 4)));
-            modMetas.setDataFinal(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 5)));
+            modMetas.setValor_depositado(Double.parseDouble(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 5))));
             
             
             DadosTemporarios.tempObject = (ModMetas) modMetas;

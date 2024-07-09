@@ -4,20 +4,21 @@ public class ModMetas {
     private int id;
     private String nome;
     private float valor;
-    private String descricao;
+    private int meses;
     private String dataInicial;
-    private String dataFinal;
+    private Double valor_depositado;
+    
 
     public ModMetas() {
     }
 
-    public ModMetas(int id, String nome, float valor, String descricao, String dataInicial, String dataFinal) {
+    public ModMetas(int id, String nome, float valor, int meses, String dataInicial, Double valor_depositado) {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
-        this.descricao = descricao;
+        this.meses = meses;
         this.dataInicial = dataInicial;
-        this.dataFinal = dataFinal;
+        this.valor_depositado = valor_depositado;
     }
 
     public int getId() {
@@ -44,12 +45,12 @@ public class ModMetas {
         this.valor = valor;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public int getMeses() {
+        return meses;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setMeses(int meses) {
+        this.meses = meses;
     }
 
     public String getDataInicial() {
@@ -60,17 +61,20 @@ public class ModMetas {
         this.dataInicial = dataInicial;
     }
 
-    public String getDataFinal() {
-        return dataFinal;
+    public Double getValor_depositado() {
+        return valor_depositado;
     }
 
-    public void setDataFinal(String dataFinal) {
-        this.dataFinal = dataFinal;
+    public void setValor_depositado(Double valor_depositado) {
+        this.valor_depositado = valor_depositado;
     }
 
     @Override
     public String toString() {
-        return "ModMetas{" + "id=" + id + ", nome=" + nome + ", valor=" + valor + ", descricao=" + descricao + ", dataInicial=" + dataInicial + ", dataFinal=" + dataFinal + '}';
+        return "ModMetas{" + "id=" + id + ", nome=" + nome + ", valor=" + valor + ", meses=" + meses + ", dataInicial=" + dataInicial + ", valor_depositado=" + valor_depositado + '}';
     }
-    
 }
+
+    
+
+    

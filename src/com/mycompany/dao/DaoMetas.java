@@ -13,16 +13,16 @@ import java.sql.ResultSet;
 public class DaoMetas extends BancoDeDadosMySql {
     private String sql;
     
-    public Boolean inserir(String metas, Double valor, String data_inicial){
+    public Boolean inserir(String nome, Double valor,int meses, String data_inicial){
     try{
-        sql = "INSERT INTO METAS (NOME, VALOR, DATA_INICIAL) VALUES (?,?,?)";
+        sql = "INSERT INTO METAS (NOME, VALOR,MESES, DATA_INICIAL,) VALUES (?,?,?,?,0)";
         
          setStatement(getConexao().prepareStatement(sql));
          
-         getStatement().setString(1, metas);
+         getStatement().setString(1, nome);
          getStatement().setDouble(2, valor);
+         getStatement().setInt(3, meses);
          getStatement().setString(4, data_inicial);
-         
          
          getStatement().executeUpdate();
          
@@ -54,7 +54,7 @@ public class DaoMetas extends BancoDeDadosMySql {
     }
 public ResultSet ListarTodos(){
     try{
-        sql = "SELECT ID, NOME, VALOR, DATA_INICIAL FROM METAS";
+        sql = "SELECT ID, NOME, VALOR, MESES, DATA_INICIAL, VALOR_DEPOSITADO FROM METAS";
 
         setStatement(getConexao().prepareStatement(sql));
         
@@ -93,14 +93,16 @@ public ResultSet ListarTodos(){
     }
     return getResultado();
     }
-    public Boolean alterar(int ID, String nome, Double valor, String data_inicial ){
+    
+    public Boolean alterar(int ID, String nome, Double valor,int meses, String data_inicial ){
         try{
-            sql = "UPDATE METAS SET NOME = ?, VALOR = ?,DATA_INICIAL = ? WHERE ID = ?";
+            sql = "UPDATE METAS SET NOME = ?, VALOR = ?,MESES = ?,DATA_INICIAL = ? WHERE ID = ?";
             
             setStatement(getConexao().prepareStatement(sql));
-            getStatement().setInt(6,ID);
+            getStatement().setInt(5,ID);
             getStatement().setString(1, nome);
             getStatement().setDouble(2, valor);
+            getStatement().setInt(3, meses);
             getStatement().setString(4, data_inicial);
             
             

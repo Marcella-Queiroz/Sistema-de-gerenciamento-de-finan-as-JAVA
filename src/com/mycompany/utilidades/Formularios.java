@@ -15,6 +15,9 @@ public class Formularios {
     public static JFrame cadMetas;
     public static JFrame listMetas;
     
+    //Resumo Metas
+    public static JFrame resumoMetas;
+    
     //Tipo categoria
     public static JFrame cadTipoCategoria;
     public static JFrame listTipoCategoria;

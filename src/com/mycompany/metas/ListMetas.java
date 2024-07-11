@@ -6,11 +6,19 @@ package com.mycompany.metas;
 
 import com.mycompany.dao.DaoMetas;
 import com.mycompany.modelo.ModMetas;
+import com.mycompany.modelo.ModResumoMetas;
 import com.mycompany.utilidades.DadosTemporarios;
 import com.mycompany.utilidades.Formularios;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -196,30 +204,82 @@ public class ListMetas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TableMetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMetasMouseClicked
-        if(evt.getClickCount() == 2){
-            ModMetas modMetas = new ModMetas();
-            
-            modMetas.setId(Integer.parseInt(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 0))));
-            modMetas.setNome(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 1)));
-            modMetas.setValor(Float.parseFloat(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 2))));
-            modMetas.setMeses(Integer.parseInt(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 3))));
-            modMetas.setDataInicial(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 4)));
-            modMetas.setValor_depositado(Double.parseDouble(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 5))));
-            
-            
-            DadosTemporarios.tempObject = (ModMetas) modMetas;
-        
-            if(Formularios.cadMetas == null){
-                Formularios.cadMetas = new CadMetas();
-           
-            ((CadMetas)Formularios.cadMetas).existeDadosTemporarios();   
-                Formularios.cadMetas.setVisible(true); 
-                Formularios.cadMetas.setExtendedState(JFrame.NORMAL);
+
+        if (evt.getButton() == MouseEvent.BUTTON3) { // Verifica se foi clicado com o botão direito
+            int row = TableMetas.rowAtPoint(evt.getPoint());
+            if (row >= 0 && row < TableMetas.getRowCount()) {
+                TableMetas.setRowSelectionInterval(row, row); // Seleciona a linha clicada
+
+                JPopupMenu jPopupMenu = new JPopupMenu();
+
+                JMenuItem item1 = new JMenuItem("Alterar");
+                JMenuItem item2 = new JMenuItem("Visualizar");
+
+                // Adicione ações aos itens do menu aqui
+                item1.addActionListener(e -> {
+                    enviarParaAlteracao();
+                });
+
+                item2.addActionListener(e -> {
+                    enviarParavisualizacao();
+                });
+
+                jPopupMenu.add(item1);
+                jPopupMenu.add(item2);
+
+                jPopupMenu.show(TableMetas, evt.getX(), evt.getY()); // Mostra o menu na posição do clique
             }
         }
-                                           
+        
+               
+        if(evt.getClickCount() == 2){
+            enviarParaAlteracao();
+        }                           
     }//GEN-LAST:event_TableMetasMouseClicked
 
+    private void enviarParaAlteracao(){
+        ModMetas modMetas = new ModMetas();
+            
+        modMetas.setId(Integer.parseInt(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 0))));
+        modMetas.setNome(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 1)));
+        modMetas.setValor(Float.parseFloat(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 2))));
+        modMetas.setMeses(Integer.parseInt(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 3))));
+        modMetas.setDataInicial(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 4)));
+        modMetas.setValor_depositado(Double.parseDouble(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 5))));
+
+
+        DadosTemporarios.tempObject = (ModMetas) modMetas;
+
+        if(Formularios.cadMetas == null){
+            Formularios.cadMetas = new CadMetas();
+
+        ((CadMetas)Formularios.cadMetas).existeDadosTemporarios();   
+            Formularios.cadMetas.setVisible(true); 
+            Formularios.cadMetas.setExtendedState(JFrame.NORMAL);
+            }
+    }
+    
+    private void enviarParavisualizacao(){
+        ModResumoMetas modResumoMetas = new ModResumoMetas();
+            
+        modResumoMetas.setId(Integer.parseInt(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 0))));
+        modResumoMetas.setNome(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 1)));
+        modResumoMetas.setValor(Float.parseFloat(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 2))));
+        modResumoMetas.setMeses(Integer.parseInt(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 3))));
+        modResumoMetas.setDataInicial(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 4)));
+        modResumoMetas.setValor_depositado(Double.parseDouble(String.valueOf(TableMetas.getValueAt(TableMetas.getSelectedRow(), 5))));
+        
+        DadosTemporarios.tempObject = (ModResumoMetas) modResumoMetas;
+
+        if(Formularios.resumoMetas == null){
+            Formularios.resumoMetas = new ResumoMetas();
+
+            ((ResumoMetas)Formularios.resumoMetas).existeDadosTemporarios();   
+            Formularios.resumoMetas.setVisible(true); 
+            Formularios.resumoMetas.setExtendedState(JFrame.NORMAL);
+        }
+    }
+    
     private void jtfBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfBuscarActionPerformed
         switch(jcbFiltro.getSelectedIndex()){
             case 0:

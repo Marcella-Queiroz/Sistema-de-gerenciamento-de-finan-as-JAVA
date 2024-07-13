@@ -4,8 +4,11 @@
  */
 package com.mycompany.metas;
 
+import com.mycompany.dao.DaoMetas;
 import com.mycompany.modelo.ModResumoMetas;
 import com.mycompany.utilidades.DadosTemporarios;
+import com.mycompany.utilidades.Formularios;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,11 +24,17 @@ public class ResumoMetas extends javax.swing.JFrame {
         initComponents();
         
         jtfIdMetas.setEnabled(false);
-        jtfIdMetas.setEnabled(false);
-        jtfIdMetas.setEnabled(false);
-        jtfIdMetas.setEnabled(false);
-        
+        jtfNome.setEnabled(false);
+        jtfValor.setEnabled(false);
+        jfDtInicial.setEnabled(false);
+        jtfValorInserir.setVisible(false);
+        btnInserir.setVisible(false);
+        jtfValorDepositado.setEnabled(false);
+        jtfValorDeposito.setEnabled(false);
+        jtfMeses.setEnabled(false);
+        jtfValorDepositar.setEnabled(false);
     }
+    
     public Boolean existeDadosTemporarios(){
         if(DadosTemporarios.tempObject instanceof ModResumoMetas){
             int id =((ModResumoMetas) DadosTemporarios.tempObject).getId();
@@ -47,7 +56,30 @@ public class ResumoMetas extends javax.swing.JFrame {
         jtfValorDepositar.setText(String.valueOf(valorDepositado));
         jtfValorDepositar.setText(String.valueOf(valorDepositar));
         jtfValorInserir.setText(String.valueOf(valorInserir));
+        jtfValorDepositado.setText(String.valueOf(valorDepositado));
         
+        Double _valor = Double.parseDouble(jtfValor.getText());
+        int _meses = Integer.parseInt(jtfMeses.getText());
+        
+        //JOptionPane.showMessageDialog(null, _valor / _meses);//
+        
+        jtfValorDeposito.setText(String.format("%.2f", _valor/ _meses));
+        
+        
+        Double _VAlorDepositado = Double.parseDouble(jtfValorDepositado.getText());
+        
+        //JOptionPane.showMessageDialog(null, _valor / _meses);//
+        
+        jtfValorDepositar.setText(String.format("%.2f", _valor - _VAlorDepositado));
+        
+        //}if (jtfValorDepositar >= jtfValor) {
+            //System.out.println("Não é necessário mais dinheiro. Meta já alcançada.");//
+        
+            
+        if(Double.parseDouble(jtfValorDepositar.getText().replace(",", ".")) <= 0.0){
+            jtfValorInserir.setEnabled(false);
+        }
+
         DadosTemporarios.tempObject = null;
 
         return true;
@@ -74,14 +106,14 @@ public class ResumoMetas extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jtfValorDeposito = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        jtfValorDepositado = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jtfValorDepositar = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jtfMeses = new javax.swing.JTextField();
         jtfValorInserir = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnInserir = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -89,6 +121,11 @@ public class ResumoMetas extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel2.setBackground(new java.awt.Color(80, 82, 84));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -119,7 +156,7 @@ public class ResumoMetas extends javax.swing.JFrame {
 
         jLabel7.setText("Valor depositado");
 
-        jLabel8.setText("Valor a depositar");
+        jLabel8.setText("Valor Restante");
 
         jtfValorDepositar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,7 +168,12 @@ public class ResumoMetas extends javax.swing.JFrame {
 
         jLabel10.setText("Meses definidos ");
 
-        jButton1.setText("Inserir");
+        btnInserir.setText("Inserir");
+        btnInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInserirActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("R$");
@@ -191,7 +233,7 @@ public class ResumoMetas extends javax.swing.JFrame {
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addComponent(jtfValorInserir)
-                                                    .addComponent(jTextField6))
+                                                    .addComponent(jtfValorDepositado))
                                                 .addGap(54, 54, 54)))))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -210,7 +252,7 @@ public class ResumoMetas extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGap(129, 129, 129)
-                                    .addComponent(jButton1))
+                                    .addComponent(btnInserir))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel12)
@@ -266,7 +308,7 @@ public class ResumoMetas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfValorDepositado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jtfValorDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel11))
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -275,7 +317,7 @@ public class ResumoMetas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfValorInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
         );
 
@@ -306,8 +348,51 @@ public class ResumoMetas extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfValorDepositarActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        JOptionPane.showMessageDialog(null,"testre");
+       if (evt.getClickCount() == 1) {
+
+        if (jtfValorDeposito == null) {
+        
+        } else {
+        
+        jtfValorInserir.setVisible(true);
+        btnInserir.setVisible(true);
+        
+        jtfValorInserir.setText("");
+    }
+}
+        //JOptionPane.showMessageDialog(null,"testre");//
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        Formularios.resumoMetas = null;
+    }//GEN-LAST:event_formWindowClosed
+
+    private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
+        DaoMetas daoMetas = new DaoMetas();
+        
+        Double valorDepositado = Double.parseDouble(jtfValorDepositado.getText());
+        Double valorDepositar = Double.parseDouble(jtfValorInserir.getText());
+        
+        jtfValorDepositado.setText(String.valueOf(valorDepositado + valorDepositar));
+        
+        daoMetas.alterarValorDepositado(Integer.parseInt(jtfIdMetas.getText()), Double.parseDouble(jtfValorDepositado.getText()));
+        
+        ((ListMetas) Formularios.listMetas).listarTodos();
+        
+//        Double valorDepositarAtualizado = valorDepositar - valorInserir;
+        
+//        jtfValorDepositar.setText(String.valueOf(valorDepositarAtualizado));
+        
+        Double valorDepositadoAtualizado = Double.parseDouble(jtfValorDepositado.getText());
+        Double valorTotal = Double.parseDouble(jtfValor.getText());
+        
+        Double valorDepositarAtualizado = valorTotal - valorDepositadoAtualizado;
+        
+        jtfValorDepositar.setText(String.valueOf(valorDepositarAtualizado));;
+
+        jtfValorInserir.setText("");
+        
+    }//GEN-LAST:event_btnInserirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,7 +431,7 @@ public class ResumoMetas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnInserir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -362,13 +447,13 @@ public class ResumoMetas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jfDtInicial;
     private javax.swing.JTextField jtfIdMetas;
     private javax.swing.JLabel jtfLabelID;
     private javax.swing.JTextField jtfMeses;
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfValor;
+    private javax.swing.JTextField jtfValorDepositado;
     private javax.swing.JTextField jtfValorDepositar;
     private javax.swing.JTextField jtfValorDeposito;
     private javax.swing.JTextField jtfValorInserir;

@@ -15,7 +15,7 @@ public class DaoMetas extends BancoDeDadosMySql {
     
     public Boolean inserir(String nome, Double valor,int meses, String data_inicial){
     try{
-        sql = "INSERT INTO METAS (NOME, VALOR,MESES, DATA_INICIAL,) VALUES (?,?,?,?,0)";
+        sql = "INSERT INTO METAS (NOME, VALOR,MESES, DATA_INICIAL, VALOR_DEPOSITADO) VALUES (?,?,?,?,0)";
         
          setStatement(getConexao().prepareStatement(sql));
          
@@ -113,7 +113,27 @@ public ResultSet ListarTodos(){
             System.out.println(e.getMessage());
             return false;
         }
-}
+    }
+    
+    public Boolean alterarValorDepositado(int ID, Double valorDepositado){
+        try{
+            sql = "UPDATE METAS SET VALOR_DEPOSITADO = ? WHERE ID = ?";
+            
+            setStatement(getConexao().prepareStatement(sql));
+            getStatement().setInt(2,ID);
+            getStatement().setDouble(1, valorDepositado);
+            
+            
+            getStatement().executeUpdate();
+            
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    
     public Boolean excluir (int id ){
      try{
          sql = "DELETE FROM METAS WHERE ID = ?";

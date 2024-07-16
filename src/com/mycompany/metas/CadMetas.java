@@ -117,6 +117,8 @@ public class CadMetas extends javax.swing.JFrame {
         
         dispose();
     }
+        
+        
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

@@ -68,7 +68,7 @@ public class DaoReceitas extends BancoDeDadosMySql {
 }
     public ResultSet listarPorId(int id){
     try{
-        sql = "SELECT ID, NOME FROM RECEITAS WHERE ID = ?";
+        sql = "SELECT ID, CATEGORIA_ID, NOME, VALOR, DATA_DE_LANCAMENTO FROM RECEITAS WHERE ID = ?";
             
         setStatement(getConexao().prepareStatement(sql));
             
@@ -82,7 +82,7 @@ public class DaoReceitas extends BancoDeDadosMySql {
     }
     public ResultSet ListarPorNome(String nome){
     try{
-        sql = "SELECT ID, NOME FROM RCEITAS WHERE NOME LIKE ?";
+        sql = "SELECT ID, CATEGORIA_ID, NOME, VALOR, DATA_DE_LANCAMENTO FROM RECEITAS WHERE NOME LIKE ?";
         
         setStatement(getConexao().prepareStatement(sql));
         

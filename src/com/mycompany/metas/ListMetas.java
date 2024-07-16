@@ -61,32 +61,30 @@ public class ListMetas extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
-    public void listarPorId(int pID){
-        try{
+    public void listarPorId(int pID) {
+        try {
             DefaultTableModel defaultTableModel = (DefaultTableModel) TableMetas.getModel();
-            
-            TableMetas.setModel(defaultTableModel);
-            
+            defaultTableModel.setRowCount(0); // Limpa a tabela antes de adicionar os resultados
+
             DaoMetas daoMetas = new DaoMetas();
-            
             ResultSet resultSet = daoMetas.listarPorId(pID);
-            
-            defaultTableModel.setRowCount(0);
-            while (resultSet.next()){  
+
+            while (resultSet.next()) {
                 String id = resultSet.getString(1);
                 String nome = resultSet.getString(2);
                 Double valor = resultSet.getDouble(3);
                 String meses = resultSet.getString(4);
-                String data_inicial = resultSet.getString(5);      
+                String data_inicial = resultSet.getString(5);
                 Double valor_depositado = resultSet.getDouble(6);
-                
-                defaultTableModel.addRow(new Object []{id, nome, valor, meses, data_inicial, valor_depositado});
+
+                defaultTableModel.addRow(new Object[]{id, nome, valor, meses, data_inicial, valor_depositado});
             }
-            
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-         }
+        }
     }
+
+   
     public void listarPorNome(String pNome){
         try{
             DefaultTableModel defaultTableModel = (DefaultTableModel) TableMetas.getModel();
@@ -166,7 +164,12 @@ public class ListMetas extends javax.swing.JFrame {
             }
         });
 
-        jcbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        jcbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "ID", "Nome" }));
+        jcbFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbFiltroActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("De dois cliques para editá-lo");
 
@@ -303,6 +306,10 @@ public class ListMetas extends javax.swing.JFrame {
     private void jtfFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfFiltroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfFiltroActionPerformed
+
+    private void jcbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbFiltroActionPerformed
+        
+    }//GEN-LAST:event_jcbFiltroActionPerformed
 
     /**
      * @param args the command line arguments

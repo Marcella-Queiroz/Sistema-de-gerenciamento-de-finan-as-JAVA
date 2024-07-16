@@ -7,6 +7,8 @@ import com.mycompany.utilidades.DadosTemporarios;
 import com.mycompany.utilidades.Formularios;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -28,16 +30,20 @@ public class ListReceitas extends javax.swing.JFrame {
     
             ResultSet resultSet = daoReceitas.ListarTodos();
         
-             defaultTableModel.setRowCount(0);
+            defaultTableModel.setRowCount(0);
             while(resultSet.next()){
                 String id = resultSet.getString(1);
                 String categoria_id = resultSet.getString(2);
                 String nome = resultSet.getString(3);
                 Double valor = resultSet.getDouble(4);
-                String data_de_lançamento = resultSet.getString(5);
+                String data_de_lancamento = resultSet.getString(5);
                 
-
-                defaultTableModel.addRow(new Object[]{id, categoria_id, nome, valor, data_de_lançamento});
+                SimpleDateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd");
+                Date dataDeLancamento = formatoEntrada.parse(data_de_lancamento);
+                SimpleDateFormat formatoSaida = new SimpleDateFormat("dd/MM/yyyy");
+                String dataFormatada = formatoSaida.format(dataDeLancamento);
+                
+                defaultTableModel.addRow(new Object[]{id, categoria_id, nome, valor, dataFormatada});
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -57,11 +63,11 @@ public class ListReceitas extends javax.swing.JFrame {
             defaultTableModel.setRowCount(0);
 
             while(resultSet.next()){
-                String id = resultSet.getNString(1);
-                String categoria_id = resultSet.getNString(2);
-                String receitas = resultSet.getNString(3);
-                Double valor = resultSet.getDouble(4);
-                String data_lancamento = resultSet.getNString(5);
+                String id = resultSet.getString(1);
+                String categoria_id = resultSet.getString(2);
+                String receitas = resultSet.getString(3);
+                String valor = resultSet.getString(4);
+                String data_lancamento = resultSet.getString(5);
 
                 defaultTableModel.addRow(new Object[]{id,categoria_id, receitas, valor,data_lancamento});
             }
@@ -82,11 +88,11 @@ public class ListReceitas extends javax.swing.JFrame {
             
             defaultTableModel.setRowCount(0);
             while(resultSet.next()){
-                String id = resultSet.getNString(1);
-                String categoria_id = resultSet.getNString(2);
-                String receitas = resultSet.getNString(3);
+                String id = resultSet.getString(1);
+                String categoria_id = resultSet.getString(2);
+                String receitas = resultSet.getString(3);
                 Double valor = resultSet.getDouble(4);
-                String data_lancamento = resultSet.getNString(5);
+                String data_lancamento = resultSet.getString(5);
                 
                 defaultTableModel.addRow(new Object[]{id,categoria_id, receitas, valor, data_lancamento});
             } 
@@ -108,7 +114,7 @@ public class ListReceitas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jtfFiltrar1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "ID", "Nome", "Descrição" }));
+        jtfFiltrar1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "ID", "Nome" }));
 
         jtfButtonBuscar1.setText("Buscar");
         jtfButtonBuscar1.addActionListener(new java.awt.event.ActionListener() {

@@ -8,6 +8,9 @@ import com.mycompany.utilidades.Constantes;
 import com.mycompany.modelo.ModReceitas;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class CadReceitas extends javax.swing.JFrame {
@@ -67,27 +70,37 @@ public class CadReceitas extends javax.swing.JFrame {
         }else
             return false;
     }
-    private void inserir(){
+
+        public void inserir() {
         DaoReceitas daoReceitas = new DaoReceitas();
 
         int categoriaId = Integer.parseInt(jtfIdCategoria.getText());
-        String receitas =jtfReceita.getText();
+        String receitas = jtfReceita.getText();
         Double valor = Double.valueOf(jtfValor.getText());
-        String Data_de_Lançamento = jtfDtLançamento.getText();
+        String Data_de_Lancamento = jtfDtLançamento.getText();
+
+        try {
+            // Converta a data de lançamento para o formato do banco de dados (YYYY-MM-DD)
+            SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd/MM/yyyy");
+            Date dataDeLancamento = formatoEntrada.parse(Data_de_Lancamento);
+
+            SimpleDateFormat formatoSaida = new SimpleDateFormat("yyyy-MM-dd");
+            String dataFormatada = formatoSaida.format(dataDeLancamento);
+
+            // Resto do seu código para inserir a receita...
+            if (daoReceitas.inserir(categoriaId, receitas, valor, dataFormatada)) {
+                JOptionPane.showMessageDialog(null, "Novo tipo de receita cadastrado! ");
+                jtfReceita.setText("");
+                jtfValor.setText("");
+                jtfDtLançamento.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar a receita");
+            }
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Formato de data inválido. Por favor, forneça uma data no formato DD/MM/YYYY.");
+        }
+    }
         
-
-        if (daoReceitas.inserir(categoriaId,receitas , valor, Data_de_Lançamento)){
-            JOptionPane.showMessageDialog(null, "Novo tipo de receita cadastrado! ");
-
-            jtfReceita.setText("");
-            jtfValor.setText("");
-            jtfDtLançamento.setText("");
-
-        }else{
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar a receita");
-          }
-    
-    }    
     private void alterar(){
             DaoReceitas daoReceitas = new DaoReceitas();
             
@@ -95,16 +108,14 @@ public class CadReceitas extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, " Alterado com sucesso! ");
                 
                 jtfIdReceitas.setText("");
-                jtfReceita.setText("");
-                
-        }else{
-            JOptionPane.showMessageDialog(null, "Não foi possivel alterar a receita! ");
-        }
+                jtfReceita.setText("");  
+            }else{
+                JOptionPane.showMessageDialog(null, "Não foi possivel alterar a receita! ");
+            }
+            
             ((ListReceitas)Formularios.listReceitas).listarTodos();
             
-            dispose();
-            
-            
+            dispose();       
     }
     private void excluir(){
         DaoReceitas daoReceitas = new DaoReceitas();         

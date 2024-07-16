@@ -44,6 +44,7 @@ public class ListDespesas extends javax.swing.JFrame {
         }
     }
     
+    
     public void listarPorId(int pID){
     try{
         DefaultTableModel defaultTableModel = (DefaultTableModel) TableDespesas.getModel();
@@ -57,12 +58,12 @@ public class ListDespesas extends javax.swing.JFrame {
         defaultTableModel.setRowCount(0);
         
         while(resultSet.next()){
-            String id = resultSet.getNString(1);
-            String categoria_id = resultSet.getNString(2);
-            String despesa = resultSet.getNString(3);
+            String id = resultSet.getString(1);
+            String categoria_id = resultSet.getString(2);
+            String despesa = resultSet.getString(3);
             Double valor = resultSet.getDouble(4);
-            String vencimento = resultSet.getNString(5);
-            String pagamento = resultSet.getNString(6);
+            String vencimento = resultSet.getString(5);
+            String pagamento = resultSet.getString(6);
             
             defaultTableModel.addRow(new Object[]{id,categoria_id, despesa, valor, vencimento, pagamento});
         }
@@ -133,7 +134,7 @@ public class ListDespesas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jcbFiltrar1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "ID", "Nome", "Descrição" }));
+        jcbFiltrar1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "ID", "Nome" }));
 
         jtfButtonBuscar1.setText("Buscar");
         jtfButtonBuscar1.addActionListener(new java.awt.event.ActionListener() {
@@ -180,7 +181,7 @@ public class ListDespesas extends javax.swing.JFrame {
                     .addGroup(BtnBuscarLayout.createSequentialGroup()
                         .addComponent(jcbFiltrar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
+                        .addComponent(jtfFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtfButtonBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BtnBuscarLayout.createSequentialGroup()

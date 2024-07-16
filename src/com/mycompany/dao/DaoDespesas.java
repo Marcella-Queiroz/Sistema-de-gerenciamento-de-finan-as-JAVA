@@ -72,7 +72,7 @@ public ResultSet ListarTodos(){
    
     public ResultSet listarPorId(int id){
     try{
-        sql = "SELECT ID, NOME FROM DESPESAS WHERE ID = ?";
+        sql = "SELECT ID, CATEGORIA_ID, NOME, VALOR, VENCIMENTO, PAGAMENTO FROM DESPESAS WHERE ID = ?";
             
         setStatement(getConexao().prepareStatement(sql));
             
@@ -86,7 +86,7 @@ public ResultSet ListarTodos(){
     }
     public ResultSet ListarPorNome(String nome){
     try{
-        sql = "SELECT ID, NOME FROM DESPESAS WHERE NOME LIKE ?";
+        sql = "SELECT ID, CATEGORIA_ID, NOME, VALOR, VENCIMENTO, PAGAMENTO FROM DESPESAS WHERE NOME LIKE ?";
         
         setStatement(getConexao().prepareStatement(sql));
         
@@ -107,8 +107,8 @@ public ResultSet ListarTodos(){
             getStatement().setInt(1, Categoria_id);
             getStatement().setString(2, Despesas);
             getStatement().setFloat(3, Valor);
-            getStatement().setString(4, Vencimento);
-//            getStatement().setString(5, Pagamento);
+            
+           
             
             if(Vencimento.equals("")){
                 getStatement().setNull(4, Types.DATE);

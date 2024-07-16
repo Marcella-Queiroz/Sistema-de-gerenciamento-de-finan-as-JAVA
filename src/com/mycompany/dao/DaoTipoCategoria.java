@@ -70,7 +70,7 @@ public class DaoTipoCategoria extends BancoDeDadosMySql{
             }catch(Exception e){
                 System.out.println(e.getMessage());
             }
-            return getResultado();
+            return getResultado(); 
          }
          
          public ResultSet listarPorNome (String nome){

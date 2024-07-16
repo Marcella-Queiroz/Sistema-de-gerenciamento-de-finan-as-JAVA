@@ -1,15 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.dao;
 
 import com.mycompany.utilidades.BancoDeDadosMySql;
 import java.sql.ResultSet;
-/**
- *
- * @author marcella.1963
- */
+
 public class DaoMetas extends BancoDeDadosMySql {
     private String sql;
     
@@ -67,11 +60,12 @@ public ResultSet ListarTodos(){
    
     public ResultSet listarPorId(int id){
     try{
-        sql = "SELECT ID, NOME FROM METAS WHERE ID = ?";
+        sql = "SELECT ID, NOME, VALOR, MESES, DATA_INICIAL, VALOR_DEPOSITADO FROM METAS WHERE ID = ?";
             
         setStatement(getConexao().prepareStatement(sql));
             
         getStatement().setInt(1, id);
+        
             
         setResultado(getStatement().executeQuery());
     }catch(Exception e){
@@ -81,7 +75,7 @@ public ResultSet ListarTodos(){
     }
     public ResultSet ListarPorNome(String nome){
     try{
-        sql = "SELECT ID, NOME FROM METAS WHERE NOME LIKE ?";
+        sql = "SELECT ID, NOME, VALOR, MESES, DATA_INICIAL, VALOR_DEPOSITADO FROM METAS WHERE NOME LIKE ?";
         
         setStatement(getConexao().prepareStatement(sql));
         

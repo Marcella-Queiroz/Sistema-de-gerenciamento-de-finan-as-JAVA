@@ -160,6 +160,12 @@ public class ListMetas extends javax.swing.JFrame {
             }
         });
 
+        jtfFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfFiltroActionPerformed(evt);
+            }
+        });
+
         jcbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         jLabel1.setText("De dois cliques para editá-lo");
@@ -293,6 +299,10 @@ public class ListMetas extends javax.swing.JFrame {
                 break;
         }
     }//GEN-LAST:event_jtfBuscarActionPerformed
+
+    private void jtfFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfFiltroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfFiltroActionPerformed
 
     /**
      * @param args the command line arguments

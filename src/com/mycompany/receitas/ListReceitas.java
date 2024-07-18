@@ -5,6 +5,7 @@ import com.mycompany.modelo.ModDespesas;
 import com.mycompany.modelo.ModReceitas;
 import com.mycompany.utilidades.DadosTemporarios;
 import com.mycompany.utilidades.Formularios;
+import com.mycompany.utilidades.MyFormatter;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
@@ -38,11 +39,7 @@ public class ListReceitas extends javax.swing.JFrame {
                 Double valor = resultSet.getDouble(4);
                 String data_de_lancamento = resultSet.getString(5);
                 
-                SimpleDateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd");
-                Date dataDeLancamento = formatoEntrada.parse(data_de_lancamento);
-                SimpleDateFormat formatoSaida = new SimpleDateFormat("dd/MM/yyyy");
-                String dataFormatada = formatoSaida.format(dataDeLancamento);
-                
+                String dataFormatada = MyFormatter.formatDate(data_de_lancamento, "yyyy-MM-dd", "dd/MM/yyyy");                
                 defaultTableModel.addRow(new Object[]{id, categoria_id, nome, valor, dataFormatada});
             }
         }catch(Exception e){
@@ -69,7 +66,8 @@ public class ListReceitas extends javax.swing.JFrame {
                 String valor = resultSet.getString(4);
                 String data_lancamento = resultSet.getString(5);
 
-                defaultTableModel.addRow(new Object[]{id,categoria_id, receitas, valor,data_lancamento});
+                String dataFormatada = MyFormatter.formatDate(data_lancamento, "yyyy-MM-dd", "dd/MM/yyyy");
+                defaultTableModel.addRow(new Object[]{id,categoria_id, receitas, valor,dataFormatada});
             }
         }catch(Exception e ){
             System.out.println(e.getMessage());
@@ -78,7 +76,7 @@ public class ListReceitas extends javax.swing.JFrame {
     
     public void listarPorNome(String pNome){
         try{
-        DefaultTableModel defaultTableModel = (DefaultTableModel)tableReceitas.getModel();
+        DefaultTableModel defaultTableModel = (DefaultTableModel)tableReceitas.getModel();        
         
         tableReceitas.setModel(defaultTableModel);
         
@@ -94,8 +92,11 @@ public class ListReceitas extends javax.swing.JFrame {
                 Double valor = resultSet.getDouble(4);
                 String data_lancamento = resultSet.getString(5);
                 
-                defaultTableModel.addRow(new Object[]{id,categoria_id, receitas, valor, data_lancamento});
-            } 
+                String dataFormatada = MyFormatter.formatDate(data_lancamento, "yyyy-MM-dd", "dd/MM/yyyy");
+                defaultTableModel.addRow(new Object[]{id,categoria_id, receitas, valor, dataFormatada});
+            }
+            
+            
         }catch(Exception e){
             System.out.println(e.getMessage());
         }

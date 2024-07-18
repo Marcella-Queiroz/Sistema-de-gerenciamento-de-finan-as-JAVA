@@ -6,6 +6,7 @@ import com.mycompany.utilidades.Formularios;
 import com.mycompany.utilidades.DadosTemporarios;
 import com.mycompany.utilidades.Constantes;
 import com.mycompany.modelo.ModReceitas;
+import com.mycompany.utilidades.MyFormatter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -79,13 +80,9 @@ public class CadReceitas extends javax.swing.JFrame {
         Double valor = Double.valueOf(jtfValor.getText());
         String Data_de_Lancamento = jtfDtLançamento.getText();
 
-        try {
+        
             // Converta a data de lançamento para o formato do banco de dados (YYYY-MM-DD)
-            SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd/MM/yyyy");
-            Date dataDeLancamento = formatoEntrada.parse(Data_de_Lancamento);
-
-            SimpleDateFormat formatoSaida = new SimpleDateFormat("yyyy-MM-dd");
-            String dataFormatada = formatoSaida.format(dataDeLancamento);
+            String dataFormatada = MyFormatter.formatDate(Data_de_Lancamento, "dd/MM/yyyy", "yyyy-MM-dd");
 
             // Resto do seu código para inserir a receita...
             if (daoReceitas.inserir(categoriaId, receitas, valor, dataFormatada)) {
@@ -96,36 +93,36 @@ public class CadReceitas extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Erro ao cadastrar a receita");
             }
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(null, "Formato de data inválido. Por favor, forneça uma data no formato DD/MM/YYYY.");
-        }
+
     }
         
-    private void alterar(){
-            DaoReceitas daoReceitas = new DaoReceitas();
-            
-            if (daoReceitas.alterar(Integer.parseInt(jtfIdReceitas.getText()),Integer.parseInt(jtfIdCategoria.getText()), jtfReceita.getText(), Double.parseDouble(jtfValor.getText()), jtfDtLançamento.getText())){
-                JOptionPane.showMessageDialog(null, " Alterado com sucesso! ");
-                
-                jtfIdReceitas.setText("");
-                jtfReceita.setText("");  
-            }else{
-                JOptionPane.showMessageDialog(null, "Não foi possivel alterar a receita! ");
-            }
-            
-            ((ListReceitas)Formularios.listReceitas).listarTodos();
-            
-            dispose();       
+    private void alterar(){        
+        DaoReceitas daoReceitas = new DaoReceitas();
+
+        String dataFormatada = MyFormatter.formatDate(jtfDtLançamento.getText(), "dd/MM/yyyy", "yyyy-MM-dd");
+
+        if (daoReceitas.alterar(Integer.parseInt(jtfIdReceitas.getText()),Integer.parseInt(jtfIdCategoria.getText()), jtfReceita.getText(), Double.parseDouble(jtfValor.getText()), dataFormatada)){
+            JOptionPane.showMessageDialog(null, " Alterado com sucesso! ");
+
+            jtfIdReceitas.setText("");
+            jtfReceita.setText("");  
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possivel alterar a receita! ");
+        }
+
+        ((ListReceitas)Formularios.listReceitas).listarTodos();
+
+        dispose();
     }
     private void excluir(){
         DaoReceitas daoReceitas = new DaoReceitas();         
         if (daoReceitas.excluir(Integer.parseInt(jtfIdReceitas.getText()))){
-            JOptionPane.showMessageDialog(null, "Receita" + jtfReceita.getText() + " excluída com sucesso!");
+            JOptionPane.showMessageDialog(null, "Receita" + jtfReceita.getText() + " excluída com sucesso! ");
             
             jtfIdReceitas.setText("");
             jtfReceita.setText("");
         }else{
-            JOptionPane.showMessageDialog(null, "Não foi possível excluir a !");
+            JOptionPane.showMessageDialog(null, "Não foi possível excluir a ! ");
         }
         
         ((ListReceitas) Formularios.listReceitas).listarTodos();

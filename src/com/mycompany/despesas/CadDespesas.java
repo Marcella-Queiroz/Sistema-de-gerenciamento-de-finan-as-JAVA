@@ -6,6 +6,7 @@ import com.mycompany.modelo.ModDespesas;
 import com.mycompany.utilidades.Constantes;
 import com.mycompany.utilidades.DadosTemporarios;
 import com.mycompany.utilidades.Formularios;
+import com.mycompany.utilidades.MyFormatter;
 import com.mysql.cj.protocol.Resultset;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -70,14 +71,17 @@ public class CadDespesas extends javax.swing.JFrame {
     }
     private void inserir(){
         DaoDespesas daoDespesas = new DaoDespesas();
-
+        
         int categoriaId = Integer.parseInt(jtfIdCategoria.getText());
         String despesas =jtfDespesas.getText();
         Double valor = Double.valueOf(jtfValor.getText());
         String vencimento = jtfVencimento.getText();
         String pagamento = jtfPagamento.getText();
-
-        if (daoDespesas.inserir(categoriaId, despesas, valor, vencimento, pagamento)){
+        
+        String dataFormatada = MyFormatter.formatDate(vencimento, "dd/MM/yyyy", "yyyy-MM-dd");
+        String dataFormatada2 = MyFormatter.formatDate(pagamento, "dd/MM/yyyy", "yyyy-MM-dd");
+        
+        if (daoDespesas.inserir(categoriaId, despesas, valor, dataFormatada, dataFormatada2)){
             JOptionPane.showMessageDialog(null, "Novo tipo de depesa cadastrado! ");
 
             jtfIdCategoria.setText(String.valueOf(daoDespesas.buscarProximoID()));
@@ -88,18 +92,21 @@ public class CadDespesas extends javax.swing.JFrame {
             
 
         }else{
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar a despesa");
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar a despesa ");
           }
     }
     
     private void alterar(){
             DaoDespesas daoDespesas = new DaoDespesas();
+            String dataFormatada = MyFormatter.formatDate(jtfVencimento.getText(), "dd/MM/yyyy", "yyyy-MM-dd");
+            String dataFormatada2 = MyFormatter.formatDate(jtfPagamento.getText(), "dd/MM/yyyy", "yyyy-MM-dd");
             
-            if (daoDespesas.alterar(Integer.parseInt(jtfIdDespesas.getText()),Integer.parseInt(jtfIdCategoria.getText()), jtfDespesas.getText(), Float.parseFloat(jtfValor.getText()), jtfVencimento.getText(), jtfPagamento.getText())){
+            if (daoDespesas.alterar(Integer.parseInt(jtfIdDespesas.getText()),Integer.parseInt(jtfIdCategoria.getText()), jtfDespesas.getText(), Float.parseFloat(jtfValor.getText()), dataFormatada, dataFormatada2)){
                 JOptionPane.showMessageDialog(null, " Alterado com sucesso! ");
                 
                 jtfIdDespesas.setText("");
                 jtfDespesas.setText("");
+                
         }else{
             JOptionPane.showMessageDialog(null, "Não foi possivel alterar a despesa! ");
         }
@@ -117,7 +124,7 @@ public class CadDespesas extends javax.swing.JFrame {
             jtfIdDespesas.setText("");
             jtfDespesas.setText("");
         }else{
-            JOptionPane.showMessageDialog(null, "Não foi possível excluir a !");
+            JOptionPane.showMessageDialog(null, "Não foi possível excluir a!");
         }
         
         ((ListDespesas) Formularios.listDespesas).listarTodos();

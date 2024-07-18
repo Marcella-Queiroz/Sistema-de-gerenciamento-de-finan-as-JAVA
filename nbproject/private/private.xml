@@ -4,10 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/com/mycompany/metas/ResumoMetas.java</file>
-            <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/com/mycompany/dao/DaoMetas.java</file>
-            <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/com/mycompany/modelo/ModMetas.java</file>
             <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/sisgerenciamentocontas/MenuPrincipal.java</file>
+            <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/com/mycompany/metas/ListMetas.java</file>
+            <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/com/mycompany/receitas/ListReceitas.java</file>
             <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/com/mycompany/metas/CadMetas.java</file>
+            <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/com/mycompany/receitas/CadReceitas.java</file>
         </group>
     </open-files>
 </project-private>

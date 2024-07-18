@@ -28,7 +28,7 @@ public class ListDespesas extends javax.swing.JFrame {
     
             ResultSet resultSet = daoDespesas.ListarTodos();
         
-             defaultTableModel.setRowCount(0);
+            defaultTableModel.setRowCount(0);
             while(resultSet.next()){
                 String id = resultSet.getString(1);
                 String categoria_id = resultSet.getString(2);
@@ -36,7 +36,7 @@ public class ListDespesas extends javax.swing.JFrame {
                 Double valor = resultSet.getDouble(4);
                 String vencimento = resultSet.getString(5);
                 String pagamento = resultSet.getString(6);
-
+                
                 defaultTableModel.addRow(new Object[]{id, categoria_id, nome, valor, vencimento, pagamento});
             }
         }catch(Exception e){

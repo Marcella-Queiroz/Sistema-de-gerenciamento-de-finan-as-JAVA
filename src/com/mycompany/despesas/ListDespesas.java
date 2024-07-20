@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import com.mycompany.modelo.ModDespesas;
 import com.mycompany.utilidades.DadosTemporarios;
 import com.mycompany.utilidades.Formularios;
+import com.mycompany.utilidades.MyFormatter;
 import javax.swing.JFrame;
 
 public class ListDespesas extends javax.swing.JFrame {
@@ -37,7 +38,14 @@ public class ListDespesas extends javax.swing.JFrame {
                 String vencimento = resultSet.getString(5);
                 String pagamento = resultSet.getString(6);
                 
-                defaultTableModel.addRow(new Object[]{id, categoria_id, nome, valor, vencimento, pagamento});
+                String dataFormatada = "";
+                String dataFormatada2 = "";
+                try{
+                    dataFormatada = MyFormatter.formatDate(vencimento, "yyyy-MM-dd", "dd/MM/yyyy");
+                    dataFormatada2 = MyFormatter.formatDate(pagamento, "yyyy-MM-dd", "dd/MM/yyyy");
+                }catch(Exception e){}
+                
+                defaultTableModel.addRow(new Object[]{id, categoria_id, nome, valor, dataFormatada, dataFormatada2});
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -60,13 +68,20 @@ public class ListDespesas extends javax.swing.JFrame {
         while(resultSet.next()){
             String id = resultSet.getString(1);
             String categoria_id = resultSet.getString(2);
-            String despesa = resultSet.getString(3);
+            String nome = resultSet.getString(3);
             Double valor = resultSet.getDouble(4);
             String vencimento = resultSet.getString(5);
             String pagamento = resultSet.getString(6);
             
-            defaultTableModel.addRow(new Object[]{id,categoria_id, despesa, valor, vencimento, pagamento});
-        }
+            String dataFormatada = "";
+            String dataFormatada2 = "";
+            try{
+                dataFormatada = MyFormatter.formatDate(vencimento, "yyyy-MM-dd", "dd/MM/yyyy");
+                dataFormatada2 = MyFormatter.formatDate(pagamento, "yyyy-MM-dd", "dd/MM/yyyy");
+            }catch(Exception e){}
+                
+                defaultTableModel.addRow(new Object[]{id, categoria_id, nome, valor, dataFormatada, dataFormatada2});
+            }
         
     }catch(Exception e ){
         System.out.println(e.getMessage());
@@ -87,13 +102,19 @@ public class ListDespesas extends javax.swing.JFrame {
             while(resultSet.next()){
                 String id = resultSet.getString(1);
                 String categoria_id = resultSet.getString(2);
-                String despesa = resultSet.getNString(3);
+                String nome = resultSet.getNString(3);
                 Double valor = resultSet.getDouble(4);
                 String vencimento = resultSet.getString(5);
                 String pagamento = resultSet.getString(6);
+               String dataFormatada = "";
+            String dataFormatada2 = "";
+            try{
+                dataFormatada = MyFormatter.formatDate(vencimento, "yyyy-MM-dd", "dd/MM/yyyy");
+                dataFormatada2 = MyFormatter.formatDate(pagamento, "yyyy-MM-dd", "dd/MM/yyyy");
+            }catch(Exception e){}
                 
-                defaultTableModel.addRow(new Object[]{id, categoria_id, despesa,valor, vencimento, pagamento});
-            } 
+                defaultTableModel.addRow(new Object[]{id, categoria_id, nome, valor, dataFormatada, dataFormatada2});
+            }
         }catch(Exception e){
             System.out.println(e.getMessage());
         }

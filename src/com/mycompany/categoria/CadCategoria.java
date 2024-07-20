@@ -3,20 +3,56 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.categoria;
-
+import com.mycompany.dao.DaoCategoria;
+import com.mycompany.utilidades.DadosTemporarios;
+import com.mycompany.modelo.ModCategoria;
+import javax.swing.JOptionPane;
+import java.sql.ResultSet;
 /**
  *
  * @author marcella.1963
  */
 public class CadCategoria extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadCategoria
-     */
     public CadCategoria() {
         initComponents();
     }
-
+    public Boolean existeDadosTemporarios(){
+    if (DadosTemporarios.tempObject instanceof ModCategoria){
+        
+    int id = ((ModCategoria)DadosTemporarios.tempObject).getId();
+    int tipoCategoria = ((ModCategoria)DadosTemporarios.tempObject).getTipoCategoria();
+    String nome = ((ModCategoria)DadosTemporarios.tempObject).getNome();
+    
+    jtfID.setText(String.valueOf(id));
+    //jcbTipoCategoria.setText(String.valueOf(tipoCategoria));
+    jtfNome.setText(nome);
+    
+    DadosTemporarios.tempObject = null;
+    return true;
+    
+    }else
+        return false;
+    }
+    
+    /*private void inserir(){
+        DaoCategoria daoCategoria = new DaoCategoria();
+        
+        int Id = Integer.parseInt(jtfID.getText());
+        //int tipoCategoria = Integer.parseInt(jcbTipoCategoria());
+        String nome = jtfNome.getText();
+        
+        if(daoCategoria.inserir(Id, tipoCategoria, nome)){
+             JOptionPane.showMessageDialog(null, "Novo tipo de depesa cadastrado! ");
+            
+            jtfID.setText(String.valueOf(daoCategoria.buscarProximoID()));
+            jtfNome.setText("");
+            jcbTipoCategoria.setText("");
+            
+        }
+    }
+        */
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,18 +64,15 @@ public class CadCategoria extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jtfLabelID = new javax.swing.JLabel();
-        jtfTextFieldID = new javax.swing.JTextField();
+        jtfID = new javax.swing.JTextField();
         jtfLabelNome = new javax.swing.JLabel();
-        jtfTextFieldNome = new javax.swing.JTextField();
-        jtfLabelDescricao = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtfTextAreaDescricao = new javax.swing.JTextArea();
+        jtfNome = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jtfButtonSalvar = new javax.swing.JButton();
         jtfButtonExcluir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jcbTipoCategoria = new javax.swing.JComboBox<>();
         jSeparator3 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,22 +83,16 @@ public class CadCategoria extends javax.swing.JFrame {
 
         jtfLabelNome.setText("Nome");
 
-        jtfLabelDescricao.setText("Descrição");
-
-        jtfTextAreaDescricao.setColumns(20);
-        jtfTextAreaDescricao.setRows(5);
-        jScrollPane1.setViewportView(jtfTextAreaDescricao);
-
         jtfButtonSalvar.setText("Salvar");
 
         jtfButtonExcluir.setText("Excluir");
 
         jLabel1.setText("Tipo de Categoria");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Receitas", "Despesas" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        jcbTipoCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Receitas", "Despesas" }));
+        jcbTipoCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                jcbTipoCategoriaActionPerformed(evt);
             }
         });
 
@@ -83,20 +110,18 @@ public class CadCategoria extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jtfButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
-                                .addComponent(jtfLabelDescricao)
                                 .addComponent(jtfLabelNome)
                                 .addComponent(jtfLabelID, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jSeparator1)
                                 .addComponent(jSeparator2)
-                                .addComponent(jtfTextFieldNome)
-                                .addComponent(jtfTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jtfNome, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                                .addComponent(jtfID, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator3)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jcbTipoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(59, 59, 59))
         );
         jPanel1Layout.setVerticalGroup(
@@ -105,26 +130,22 @@ public class CadCategoria extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jtfLabelID, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbTipoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfLabelNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfLabelDescricao)
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(200, 200, 200)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfButtonSalvar)
                     .addComponent(jtfButtonExcluir))
@@ -155,9 +176,9 @@ public class CadCategoria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void jcbTipoCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoCategoriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_jcbTipoCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,20 +216,17 @@ public class CadCategoria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JComboBox<String> jcbTipoCategoria;
     private javax.swing.JButton jtfButtonExcluir;
     private javax.swing.JButton jtfButtonSalvar;
-    private javax.swing.JLabel jtfLabelDescricao;
+    private javax.swing.JTextField jtfID;
     private javax.swing.JLabel jtfLabelID;
     private javax.swing.JLabel jtfLabelNome;
-    private javax.swing.JTextArea jtfTextAreaDescricao;
-    private javax.swing.JTextField jtfTextFieldID;
-    private javax.swing.JTextField jtfTextFieldNome;
+    private javax.swing.JTextField jtfNome;
     // End of variables declaration//GEN-END:variables
 }

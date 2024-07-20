@@ -1,6 +1,6 @@
 package com.mycompany.despesas;
 
-import com.mycompany.dao.DaoCategoria;
+import com.mycompany.dao.DaoTipo_Categoria;
 import com.mycompany.dao.DaoDespesas;
 import com.mycompany.modelo.ModDespesas;
 import com.mycompany.utilidades.Constantes;
@@ -37,7 +37,7 @@ public class CadDespesas extends javax.swing.JFrame {
         jtfIdDespesas.setEnabled(false);
         
         try{
-            ResultSet resultSet = new DaoCategoria().listarTodosPorIdCategoria(2);
+            ResultSet resultSet = new DaoTipo_Categoria().listarTodosPorIdCategoria(2);
         
             while(resultSet.next()){
                 jcbCategoria.addItem(resultSet.getString("Nome"));
@@ -317,7 +317,7 @@ public class CadDespesas extends javax.swing.JFrame {
 
     private void jcbCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCategoriaItemStateChanged
         try{
-            ResultSet resultSet = new DaoCategoria().listarPorNome(jcbCategoria.getItemAt(jcbCategoria.getSelectedIndex()));
+            ResultSet resultSet = new DaoTipo_Categoria().listarPorNome(jcbCategoria.getItemAt(jcbCategoria.getSelectedIndex()));
         
             resultSet.next();
             

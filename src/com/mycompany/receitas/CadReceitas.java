@@ -1,6 +1,6 @@
 package com.mycompany.receitas;
 
-import com.mycompany.dao.DaoCategoria;
+import com.mycompany.dao.DaoTipo_Categoria;
 import com.mycompany.dao.DaoReceitas;
 import com.mycompany.utilidades.Formularios;
 import com.mycompany.utilidades.DadosTemporarios;
@@ -39,7 +39,7 @@ public class CadReceitas extends javax.swing.JFrame {
         jtfIdReceitas.setEnabled(false);
         
         try{
-            ResultSet resultSet = new DaoCategoria().listarTodosPorIdCategoria(1);
+            ResultSet resultSet = new DaoTipo_Categoria().listarTodosPorIdCategoria(1);
         
             while(resultSet.next()){
                 JcbCategoria.addItem(resultSet.getString("Nome"));
@@ -152,6 +152,8 @@ public class CadReceitas extends javax.swing.JFrame {
         btnExcluir2 = new javax.swing.JButton();
         jtfLabelDtLancamento = new javax.swing.JLabel();
         jtfIdCategoria = new javax.swing.JTextField();
+        jtfLabelCad = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -207,6 +209,13 @@ public class CadReceitas extends javax.swing.JFrame {
             }
         });
 
+        jtfLabelCad.setText("Categoria");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel1.setText("Adicionar categoria");
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -215,30 +224,38 @@ public class CadReceitas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1)
-                    .addComponent(jSeparator3)
                     .addComponent(jtfReceita)
                     .addComponent(jSeparator2)
                     .addComponent(jSeparator4)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSalvar2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnExcluir2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jtfLabelID, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfIdReceitas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfLabelCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                                    .addComponent(JcbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfIdCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnSalvar2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnExcluir2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jtfLabelID, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtfIdReceitas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jtfLabelCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                                        .addComponent(JcbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jtfLabelCad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jtfIdCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(0, 96, Short.MAX_VALUE)))))
                             .addComponent(jtfLabelDespesa)
                             .addComponent(jtfLabelValor)
                             .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfLabelDtLancamento)
                             .addComponent(jtfDtLançamento, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 189, Short.MAX_VALUE)))
+                        .addGap(129, 129, 129))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jSeparator3))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -251,12 +268,16 @@ public class CadReceitas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfLabelCategoria)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfLabelCategoria)
+                    .addComponent(jtfLabelCad))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JcbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfIdCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(9, 9, 9)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfLabelDespesa)
@@ -274,7 +295,7 @@ public class CadReceitas extends javax.swing.JFrame {
                 .addComponent(jtfLabelDtLancamento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfDtLançamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar2)
                     .addComponent(btnExcluir2))
@@ -325,7 +346,7 @@ public class CadReceitas extends javax.swing.JFrame {
 
     private void JcbCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JcbCategoriaItemStateChanged
         try{
-            DaoCategoria daoCategoria = new DaoCategoria();
+            DaoTipo_Categoria daoCategoria = new DaoTipo_Categoria();
 
         //        JOptionPane.showMessageDialog(null, JcbCategoria.getSelectedItem().toString());
 
@@ -352,6 +373,7 @@ public class CadReceitas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> JcbCategoria;
     private javax.swing.JButton btnExcluir2;
     private javax.swing.JButton btnSalvar2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -359,6 +381,7 @@ public class CadReceitas extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jtfDtLançamento;
     private javax.swing.JTextField jtfIdCategoria;
     private javax.swing.JTextField jtfIdReceitas;
+    private javax.swing.JLabel jtfLabelCad;
     private javax.swing.JLabel jtfLabelCategoria;
     private javax.swing.JLabel jtfLabelDespesa;
     private javax.swing.JLabel jtfLabelDtLancamento;

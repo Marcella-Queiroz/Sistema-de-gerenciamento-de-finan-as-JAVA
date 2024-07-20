@@ -30,26 +30,33 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jSeparator1" max="32767" attributes="0"/>
-                  <Component id="jSeparator3" max="32767" attributes="0"/>
                   <Component id="jtfReceita" alignment="0" max="32767" attributes="0"/>
                   <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
                   <Component id="jSeparator4" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnSalvar2" min="-2" pref="78" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnExcluir2" min="-2" pref="80" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jtfLabelID" alignment="0" min="-2" pref="21" max="-2" attributes="0"/>
-                          <Component id="jtfIdReceitas" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jtfLabelCategoria" pref="96" max="32767" attributes="0"/>
-                                  <Component id="JcbCategoria" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="btnSalvar2" min="-2" pref="78" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btnExcluir2" min="-2" pref="80" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jtfIdCategoria" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfLabelID" alignment="0" min="-2" pref="21" max="-2" attributes="0"/>
+                              <Component id="jtfIdReceitas" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jtfLabelCategoria" pref="96" max="32767" attributes="0"/>
+                                      <Component id="JcbCategoria" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jtfLabelCad" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jtfIdCategoria" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="96" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
                           </Group>
                           <Component id="jtfLabelDespesa" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jtfLabelValor" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -57,8 +64,13 @@
                           <Component id="jtfLabelDtLancamento" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jtfDtLançamento" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="189" max="32767" attributes="0"/>
+                      <EmptySpace min="129" pref="129" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="jSeparator3" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -74,13 +86,18 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="4" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jtfLabelCategoria" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jtfLabelCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfLabelCad" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="JcbCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jtfIdCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Component id="jSeparator3" min="-2" pref="3" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jtfLabelDespesa" min="-2" max="-2" attributes="0"/>
@@ -98,7 +115,7 @@
               <Component id="jtfLabelDtLancamento" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jtfDtLançamento" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="16" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnSalvar2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnExcluir2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -187,6 +204,25 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfIdCategoriaActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jtfLabelCad">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Categoria"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="11" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="66" red="0" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Adicionar categoria"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

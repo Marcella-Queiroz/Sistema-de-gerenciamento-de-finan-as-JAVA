@@ -4,6 +4,7 @@ public class ModCategoria {
     private int id;
     private int tipoCategoria;
     private String nome;
+    
 
     public ModCategoria() {
     }

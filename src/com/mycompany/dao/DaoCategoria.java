@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 public class DaoCategoria extends BancoDeDadosMySql{
     
     String sql;
-    public Boolean inserir(int id, int tipoCategoria, String nome  ){
+    public Boolean inserir(int id, int tipoCategoria, String nome){
     try{
         sql = "INSERT INTO categoria(ID, TIPO_CATEGORIA, NOME) VALUES (?,?,?)";
         
@@ -30,6 +30,23 @@ public class DaoCategoria extends BancoDeDadosMySql{
     }catch(Exception e){
         System.err.println(e.getLocalizedMessage());
         
+        return false;
+    }
+}
+    public Boolean alterar(int categoria_ID, int idTipoCategoria, String Nome ){
+    try{
+        sql = "UPDATE RECEITAS SET ID = ?,TIPO_CATEGORIA, NOME = ?";
+
+        setStatement(getConexao().prepareStatement(sql));
+        getStatement().setInt(5,categoria_ID);
+        getStatement().setInt(1, idTipoCategoria);
+        getStatement().setString(2, Nome);
+     
+        getStatement().executeUpdate();
+
+        return true;
+    }catch(Exception e){
+        System.out.println(e.getMessage());
         return false;
     }
 }
@@ -54,7 +71,7 @@ public class DaoCategoria extends BancoDeDadosMySql{
     
     public ResultSet listarTodos(){
         try{
-            sql = "SELECT * FROM CATEGORIA";
+            sql = "select * from categoria c join tipo_categoria tc on tc.ID = c.tipo_categoria ";
 
             setStatement(getConexao().prepareStatement(sql));
             

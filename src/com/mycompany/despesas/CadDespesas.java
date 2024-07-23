@@ -101,7 +101,7 @@ public class CadDespesas extends javax.swing.JFrame {
             String dataFormatada = MyFormatter.formatDate(jtfVencimento.getText(), "dd/MM/yyyy", "yyyy-MM-dd");
             String dataFormatada2 = MyFormatter.formatDate(jtfPagamento.getText(), "dd/MM/yyyy", "yyyy-MM-dd");
             
-            if (daoDespesas.alterar(Integer.parseInt(jtfIdDespesas.getText()),Integer.parseInt(jtfIdCategoria.getText()), jtfDespesas.getText(), Float.parseFloat(jtfValor.getText()), dataFormatada, dataFormatada2)){
+            if (daoDespesas.alterar(jtfID, , dataFormatada, TOP_ALIGNMENT, dataFormatada, dataFormatada)){
                 JOptionPane.showMessageDialog(null, " Alterado com sucesso! ");
                 
                 jtfIdDespesas.setText("");

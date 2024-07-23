@@ -21,4 +21,8 @@ public class Formularios {
     //Tipo categoria
     public static JFrame cadTipoCategoria;
     public static JFrame listTipoCategoria;
+    
+    //Categoria
+    public static JFrame cadCategoria;
+    public static JFrame listCategoria;
 }

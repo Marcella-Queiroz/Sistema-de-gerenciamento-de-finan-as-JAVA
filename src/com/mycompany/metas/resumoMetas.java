@@ -350,8 +350,7 @@ public class ResumoMetas extends javax.swing.JFrame {
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
        if (evt.getClickCount() == 1) {
 
-        if (jtfValorDeposito == null) {
-        
+            if (jtfValorDeposito == null) {
         } else {
         
         jtfValorInserir.setVisible(true);

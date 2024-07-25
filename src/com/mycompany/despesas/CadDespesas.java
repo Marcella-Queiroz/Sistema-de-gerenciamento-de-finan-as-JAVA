@@ -98,10 +98,12 @@ public class CadDespesas extends javax.swing.JFrame {
     
     private void alterar(){
             DaoDespesas daoDespesas = new DaoDespesas();
+            
             String dataFormatada = MyFormatter.formatDate(jtfVencimento.getText(), "dd/MM/yyyy", "yyyy-MM-dd");
             String dataFormatada2 = MyFormatter.formatDate(jtfPagamento.getText(), "dd/MM/yyyy", "yyyy-MM-dd");
             
-            if (daoDespesas.alterar(jtfID, , dataFormatada, TOP_ALIGNMENT, dataFormatada, dataFormatada)){
+            
+            if (daoDespesas.alterar(Integer.parseInt(jtfIdDespesas.getText()), Integer.parseInt(jtfIdCategoria.getText()), jtfDespesas.getText(), Double.parseDouble(jtfValor.getText()), dataFormatada, dataFormatada2)){
                 JOptionPane.showMessageDialog(null, " Alterado com sucesso! ");
                 
                 jtfIdDespesas.setText("");
@@ -333,7 +335,8 @@ public class CadDespesas extends javax.swing.JFrame {
             inserir();
             
             jtfIdDespesas.setText(String.valueOf(daoDespesas.buscarProximoID()));
-            jtfDespesas.setText("");            
+            jtfDespesas.setText("");     
+            ((ListDespesas) Formularios.listDespesas).listarTodos(); //Atualiza a tela em tempo real
         }else if (btnSalvar.getText() == Constantes.BTN_ALTERAR_TEXT){
              alterar();
             ((ListDespesas) Formularios.listDespesas).listarTodos();

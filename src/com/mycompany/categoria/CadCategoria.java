@@ -32,23 +32,27 @@ public class CadCategoria extends javax.swing.JFrame {
             jtfButtonExcluir.setVisible(true);
         }   
             
-        jtfTipoCategoria.setText("1");
+//        jtfTipoCategoria.setText("1");
         jtfID.setEnabled(false);
-        jtfTipoCategoria.setVisible(false);
+//        jtfTipoCategoria.setVisible(false);
+
+        jcbTipoCategoria.setSelectedIndex(Integer.parseInt(jtfTipoCategoria.getText()) - 1);
+        
+        setLocationRelativeTo(null);
     }
     public Boolean existeDadosTemporarios(){
-    if (DadosTemporarios.tempObject instanceof ModCategoria){
-        
-    int id = ((ModCategoria)DadosTemporarios.tempObject).getId();
-    int tipoCategoria = ((ModCategoria)DadosTemporarios.tempObject).getTipoCategoria();
-    String nome = ((ModCategoria)DadosTemporarios.tempObject).getNome();
-    
-    jtfID.setText(String.valueOf(id));
-    jtfTipoCategoria.setText(String.valueOf(tipoCategoria));
-    jtfNome.setText(nome);
-    
-    DadosTemporarios.tempObject = null;
-    return true;
+        if (DadosTemporarios.tempObject instanceof ModCategoria){
+
+        int id = ((ModCategoria)DadosTemporarios.tempObject).getId();
+        int tipoCategoria = ((ModCategoria)DadosTemporarios.tempObject).getTipoCategoria();
+        String nome = ((ModCategoria)DadosTemporarios.tempObject).getNome();
+
+        jtfID.setText(String.valueOf(id));
+        jtfTipoCategoria.setText(String.valueOf(tipoCategoria));
+        jtfNome.setText(nome);
+
+        DadosTemporarios.tempObject = null;
+        return true;
     
     }else
         return false;
@@ -108,6 +112,11 @@ public class CadCategoria extends javax.swing.JFrame {
         jtfTipoCategoria = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jtfLabelID.setText("ID");
 
@@ -250,6 +259,10 @@ public class CadCategoria extends javax.swing.JFrame {
            dispose();
         }
     }//GEN-LAST:event_jtfButtonSalvarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        Formularios.cadCategoria = null;
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

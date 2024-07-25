@@ -1,5 +1,6 @@
 package sisgerenciamentocontas;
 
+import com.mycompany.Dar_Baixa.Dar_Baixa;
 import com.mycompany.despesas.CadDespesas;
 import com.mycompany.despesas.ListDespesas;
 import com.mycompany.metas.CadMetas;
@@ -40,10 +41,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanelButtons = new javax.swing.JPanel();
         jComboBoxCadastrar = new javax.swing.JComboBox<>();
         jComboBoxListar = new javax.swing.JComboBox<>();
-        jComboBoxDarBaixa = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        BtnDar_Baixa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -52,7 +53,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1145, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,18 +106,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxDarBaixa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dar Baixa", "Despesas" }));
-        jComboBoxDarBaixa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxDarBaixaActionPerformed(evt);
-            }
-        });
-
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sisgerenciamentocontas/registro.png"))); // NOI18N
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sisgerenciamentocontas/cadastro (2).png"))); // NOI18N
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sisgerenciamentocontas/listagem.png"))); // NOI18N
+
+        BtnDar_Baixa.setText("Dar Baixa");
+        BtnDar_Baixa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnDar_BaixaMouseClicked(evt);
+            }
+        });
+        BtnDar_Baixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDar_BaixaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelButtonsLayout = new javax.swing.GroupLayout(jPanelButtons);
         jPanelButtons.setLayout(jPanelButtonsLayout);
@@ -134,8 +140,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(71, 71, 71)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxDarBaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(BtnDar_Baixa, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanelButtonsLayout.setVerticalGroup(
             jPanelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,9 +158,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanelButtonsLayout.createSequentialGroup()
                         .addGroup(jPanelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5)
-                            .addComponent(jComboBoxDarBaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BtnDar_Baixa, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(3, 3, 3)))
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addGap(0, 58, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,15 +184,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(150, 150, 150)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBoxDarBaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDarBaixaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxDarBaixaActionPerformed
 
     private void jComboBoxListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListarActionPerformed
         switch (jComboBoxListar.getSelectedIndex()) {
@@ -253,6 +255,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBoxCadastrarActionPerformed
 
+    private void BtnDar_BaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDar_BaixaActionPerformed
+        if (Formularios.Dar_Baixa == null)
+            Formularios.Dar_Baixa = new Dar_Baixa();
+        
+        Formularios.Dar_Baixa.setVisible(true);
+
+    }//GEN-LAST:event_BtnDar_BaixaActionPerformed
+
+    private void BtnDar_BaixaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnDar_BaixaMouseClicked
+        
+    }//GEN-LAST:event_BtnDar_BaixaMouseClicked
+
     public static void main(String args[]) {
 
         /* Set the Nimbus look and feel */
@@ -287,8 +301,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnDar_Baixa;
     private javax.swing.JComboBox<String> jComboBoxCadastrar;
-    private javax.swing.JComboBox<String> jComboBoxDarBaixa;
     private javax.swing.JComboBox<String> jComboBoxListar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

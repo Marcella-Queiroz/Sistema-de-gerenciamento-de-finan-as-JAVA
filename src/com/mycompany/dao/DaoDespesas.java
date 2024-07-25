@@ -98,7 +98,7 @@ public ResultSet ListarTodos(){
     }
     return getResultado();
     }
-    public Boolean alterar(int ID, int Categoria_id, String Despesas, Float Valor, String Vencimento, String Pagamento ){
+    public Boolean alterar(int ID, int Categoria_id, String Despesas, Double Valor, String Vencimento, String Pagamento ){
         try{
             sql = "UPDATE DESPESAS SET CATEGORIA_ID = ?, NOME = ?, VALOR = ?, VENCIMENTO = ?, PAGAMENTO = ? WHERE ID = ?";
             
@@ -106,7 +106,7 @@ public ResultSet ListarTodos(){
             getStatement().setInt(6,ID);
             getStatement().setInt(1, Categoria_id);
             getStatement().setString(2, Despesas);
-            getStatement().setFloat(3, Valor);
+            getStatement().setDouble(3, Valor);
             
            
             
@@ -130,6 +130,52 @@ public ResultSet ListarTodos(){
             return false;
         }
 }
+    
+    //Baixa
+    public ResultSet listarTodosBaixa(){
+    try{
+        sql = "SELECT ID, CATEGORIA_ID, NOME, VALOR, VENCIMENTO, PAGAMENTO FROM DESPESAS WHERE PAGAMENTO IS NULL";
+            
+        setStatement(getConexao().prepareStatement(sql));
+            
+        setResultado(getStatement().executeQuery());
+    }catch(Exception e){
+            System.out.println(e.getMessage());
+      }
+        return getResultado();
+    }
+    
+    public ResultSet listarPorIdBaixa(int id){
+    try{
+        sql = "SELECT ID, CATEGORIA_ID, NOME, VALOR, VENCIMENTO, PAGAMENTO FROM DESPESAS WHERE ID = ? AND PAGAMENTO IS NULL";
+            
+        setStatement(getConexao().prepareStatement(sql));
+            
+        getStatement().setInt(1, id);
+            
+        setResultado(getStatement().executeQuery());
+    }catch(Exception e){
+            System.out.println(e.getMessage());
+      }
+        return getResultado();
+    }
+    
+    public ResultSet ListarPorNomeBaixa(String nome){
+    try{
+        sql = "SELECT ID, CATEGORIA_ID, NOME, VALOR, VENCIMENTO, PAGAMENTO FROM DESPESAS WHERE NOME LIKE ? AND PAGAMENTO IS NULL";
+        
+        setStatement(getConexao().prepareStatement(sql));
+        
+        getStatement().setString(1, nome+ "%");
+        
+        setResultado(getStatement().executeQuery());
+    }catch(Exception e){
+        System.out.println(e.getMessage());
+    }
+    return getResultado();
+    }
+    //
+    
     public Boolean excluir (int id ){
      try{
          sql = "DELETE FROM DESPESAS WHERE ID = ?";
@@ -143,5 +189,35 @@ public ResultSet ListarTodos(){
          return false;
      }
      
+//     public Boolean alterarPorBaixa(int ID, int Categoria_id, String Despesas, Double Valor, String Vencimento, String Pagamento){
+//        try{
+//            sql = "UPDATE DESPESAS SET CATEGORIA_ID = ?, NOME = ?, VALOR = ?, VENCIMENTO = ?, PAGAMENTO = ? WHERE ID LIKE ?";
+//            
+//            setStatement(getConexao().prepareStatement(sql));
+//            getStatement().setInt(6,ID);
+//            getStatement().setInt(1, Categoria_id);
+//            getStatement().setString(2, Despesas);
+//            getStatement().setDouble(3, Valor);
+//
+//            if(Vencimento.equals("")){
+//                getStatement().setNull(4, Types.DATE);
+//            }else{
+//                getStatement().setString(4, Vencimento);
+//            }
+//        
+//            if(Pagamento.equals("")){
+//                getStatement().setNull(5, Types.DATE);
+//            }else{
+//                getStatement().setString(5, Pagamento);
+//            }
+//            
+//            getStatement().executeUpdate();
+//            
+//            return true;
+//        }catch(Exception e){
+//            System.out.println(e.getMessage());
+//            return false;
+//        }
+//    }
     }
 }

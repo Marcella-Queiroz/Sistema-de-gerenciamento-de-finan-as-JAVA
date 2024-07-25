@@ -19,6 +19,7 @@ public class ListDespesas extends javax.swing.JFrame {
         
         listarTodos();
     }
+    
     public void listarTodos(){
         try{
             DefaultTableModel defaultTableModel = (DefaultTableModel)tableDespesas.getModel();
@@ -119,7 +120,7 @@ public class ListDespesas extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -268,18 +269,7 @@ public class ListDespesas extends javax.swing.JFrame {
             modDespesas.setCategoriaId(Integer.parseInt(String.valueOf(tableDespesas.getValueAt(tableDespesas.getSelectedRow(), 1))));
             modDespesas.setNome(String.valueOf(tableDespesas.getValueAt(tableDespesas.getSelectedRow(), 2)));
             modDespesas.setValor(Float.parseFloat(String.valueOf(tableDespesas.getValueAt(tableDespesas.getSelectedRow(), 3))));
-           /* 
-            String dataVencimento = String.valueOf(tableDespesas.getValueAt(tableDespesas.getSelectedRow(), 4)));
-            String dataPagamento = String.valueOf(tableDespesas.getValueAt(tableDespesas.getSelectedRow(), 5)));
-            
-     
            
-            if( dataVencimento== "null"){
-                modDespesas.setdata("");
-            }else{
-                modDespesas.setDataDeLançamento(String.valueOf(tableDespesas.getValueAt(tableDespesas.getSelectedRow(), 4)));
-            }
-            */
             DadosTemporarios.tempObject = (ModDespesas) modDespesas;
             
             if(Formularios.cadDespesas == null){

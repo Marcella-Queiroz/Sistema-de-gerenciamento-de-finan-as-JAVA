@@ -41,9 +41,10 @@ public class ListCategoria extends javax.swing.JFrame {
                 String id = resultSet.getString(1);
                 String TipoCategoria = resultSet.getString("tc.nome");
                 String nome = resultSet.getString(3);
+                String idCategoria = resultSet.getString("tc.id");
                
             
-                defaultTableModel.addRow(new Object[]{id, TipoCategoria, nome});
+                defaultTableModel.addRow(new Object[]{id, TipoCategoria, nome, idCategoria});
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -65,17 +66,17 @@ public class ListCategoria extends javax.swing.JFrame {
 
         TableCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Tipo Categoria", "Nome"
+                "ID", "Tipo Categoria", "Nome", "Id Categoria"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -88,6 +89,11 @@ public class ListCategoria extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(TableCategoria);
+        if (TableCategoria.getColumnModel().getColumnCount() > 0) {
+            TableCategoria.getColumnModel().getColumn(3).setMinWidth(0);
+            TableCategoria.getColumnModel().getColumn(3).setPreferredWidth(0);
+            TableCategoria.getColumnModel().getColumn(3).setMaxWidth(0);
+        }
 
         jButton1.setText("+ Cadastrar Novo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +140,7 @@ public class ListCategoria extends javax.swing.JFrame {
             ModCategoria modCategoria = new ModCategoria();
             
             modCategoria.setId(Integer.parseInt(String.valueOf(TableCategoria.getValueAt(TableCategoria.getSelectedRow(), 0))));
-            modCategoria.setTipoCategoria(Integer.parseInt(String.valueOf(TableCategoria.getValueAt(TableCategoria.getSelectedRow(), 1))));
+            modCategoria.setTipoCategoria(Integer.parseInt(String.valueOf(TableCategoria.getValueAt(TableCategoria.getSelectedRow(), 3))));
             modCategoria.setNome(String.valueOf(TableCategoria.getValueAt(TableCategoria.getSelectedRow(), 2)));
         
             DadosTemporarios.tempObject = (ModCategoria) modCategoria;

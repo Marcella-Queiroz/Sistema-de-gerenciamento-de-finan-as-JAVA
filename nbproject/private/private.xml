@@ -3,11 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/sisgerenciamentocontas/MenuPrincipal.java</file>
+            <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/com/mycompany/dao/DaoDespesas.java</file>
+            <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/com/mycompany/despesas/CadDespesas.java</file>
+            <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/com/mycompany/utilidades/Formularios.java</file>
             <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/com/mycompany/dao/DaoCategoria.java</file>
-            <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/com/mycompany/receitas/ListReceitas.java</file>
-            <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/com/mycompany/modelo/ModCategoria.java</file>
+            <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/sisgerenciamentocontas/MenuPrincipal.java</file>
             <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/com/mycompany/categoria/CadCategoria.java</file>
+            <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/com/mycompany/despesas/ListDespesas.java</file>
+            <file>file:/C:/Users/marcella.1963/Documents/NetBeansProjects/SisGerenciamentoContas/src/com/mycompany/Dar_Baixa/Dar_Baixa.java</file>
         </group>
     </open-files>
 </project-private>

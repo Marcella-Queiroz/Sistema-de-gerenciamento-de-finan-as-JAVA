@@ -155,6 +155,7 @@ public class ListDespesas extends javax.swing.JFrame {
         jtfLabelRegistro.setText("Dê dois cliques no registro para editá-lo");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Listagem de Despesas");
 
         jcbFiltrar1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "ID", "Nome" }));
 

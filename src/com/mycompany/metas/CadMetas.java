@@ -33,7 +33,8 @@ public class CadMetas extends javax.swing.JFrame {
         }
 
         DaoMetas daoMetas = new DaoMetas();
-
+        
+        setLocationRelativeTo(null);
         jtfIdMetas.setEnabled(false);
 
     }
@@ -150,6 +151,7 @@ public class CadMetas extends javax.swing.JFrame {
         jSeparator1.setBackground(new java.awt.Color(80, 82, 84));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Metas");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);

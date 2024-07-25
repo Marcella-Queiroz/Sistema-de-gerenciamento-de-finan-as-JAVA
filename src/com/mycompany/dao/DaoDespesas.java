@@ -189,35 +189,5 @@ public ResultSet ListarTodos(){
          return false;
      }
      
-//     public Boolean alterarPorBaixa(int ID, int Categoria_id, String Despesas, Double Valor, String Vencimento, String Pagamento){
-//        try{
-//            sql = "UPDATE DESPESAS SET CATEGORIA_ID = ?, NOME = ?, VALOR = ?, VENCIMENTO = ?, PAGAMENTO = ? WHERE ID LIKE ?";
-//            
-//            setStatement(getConexao().prepareStatement(sql));
-//            getStatement().setInt(6,ID);
-//            getStatement().setInt(1, Categoria_id);
-//            getStatement().setString(2, Despesas);
-//            getStatement().setDouble(3, Valor);
-//
-//            if(Vencimento.equals("")){
-//                getStatement().setNull(4, Types.DATE);
-//            }else{
-//                getStatement().setString(4, Vencimento);
-//            }
-//        
-//            if(Pagamento.equals("")){
-//                getStatement().setNull(5, Types.DATE);
-//            }else{
-//                getStatement().setString(5, Pagamento);
-//            }
-//            
-//            getStatement().executeUpdate();
-//            
-//            return true;
-//        }catch(Exception e){
-//            System.out.println(e.getMessage());
-//            return false;
-//        }
-//    }
     }
 }

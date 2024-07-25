@@ -350,13 +350,13 @@ public class CadReceitas extends javax.swing.JFrame {
         try{
             DaoTipo_Categoria daoCategoria = new DaoTipo_Categoria();
 
-        //        JOptionPane.showMessageDialog(null, JcbCategoria.getSelectedItem().toString());
+
 
             ResultSet resultSet = daoCategoria.listarPorNome(JcbCategoria.getSelectedItem().toString());
 
             resultSet.next();
             
-//            JOptionPane.showMessageDialog(null, resultSet.getInt("id"));
+
         
             jtfIdCategoria.setText(String.valueOf(resultSet.getInt("id")));
         }catch(SQLException e){}

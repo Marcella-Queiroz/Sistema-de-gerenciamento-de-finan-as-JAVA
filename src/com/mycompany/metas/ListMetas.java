@@ -120,6 +120,7 @@ public class ListMetas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Listagem de Metas");
 
         TableMetas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -210,7 +211,7 @@ public class ListMetas extends javax.swing.JFrame {
 
     private void TableMetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMetasMouseClicked
 
-        if (evt.getButton() == MouseEvent.BUTTON3) { // Verifica se foi clicado com o botão direito
+        if (evt.getClickCount() == 2) { // Verifica se foi clicado com o botão direito
             int row = TableMetas.rowAtPoint(evt.getPoint());
             if (row >= 0 && row < TableMetas.getRowCount()) {
                 TableMetas.setRowSelectionInterval(row, row); // Seleciona a linha clicada
@@ -237,9 +238,7 @@ public class ListMetas extends javax.swing.JFrame {
         }
         
                
-        if(evt.getClickCount() == 2){
-            enviarParaAlteracao();
-        }                           
+              
     }//GEN-LAST:event_TableMetasMouseClicked
 
     private void enviarParaAlteracao(){

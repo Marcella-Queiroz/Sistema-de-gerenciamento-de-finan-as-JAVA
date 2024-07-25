@@ -45,7 +45,7 @@ public class CadDespesas extends javax.swing.JFrame {
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
-        
+        setLocationRelativeTo(null);
         jtfIdCategoria.setVisible(false);
     }
     
@@ -163,6 +163,7 @@ public class CadDespesas extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Despesas");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);

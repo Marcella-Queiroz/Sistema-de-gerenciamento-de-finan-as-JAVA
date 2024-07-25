@@ -22,7 +22,11 @@ public class Dar_Baixa extends javax.swing.JFrame {
     public Dar_Baixa() {
         initComponents();
         
+        setLocationRelativeTo(null);
+        
         listarTodosBaixa();
+        
+        
     }
     
     public void listarTodosBaixa(){
@@ -147,6 +151,7 @@ public class Dar_Baixa extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Dar Baixa");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);

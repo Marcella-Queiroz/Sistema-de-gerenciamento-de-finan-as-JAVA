@@ -32,9 +32,8 @@ public class CadCategoria extends javax.swing.JFrame {
             jtfButtonExcluir.setVisible(true);
         }   
             
-//        jtfTipoCategoria.setText("1");
+
         jtfID.setEnabled(false);
-//        jtfTipoCategoria.setVisible(false);
 
         jcbTipoCategoria.setSelectedIndex(Integer.parseInt(jtfTipoCategoria.getText()) - 1);
         
@@ -112,6 +111,7 @@ public class CadCategoria extends javax.swing.JFrame {
         jtfTipoCategoria = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Categoria");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);

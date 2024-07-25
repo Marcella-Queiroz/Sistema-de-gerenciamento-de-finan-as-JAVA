@@ -33,6 +33,8 @@ public class ResumoMetas extends javax.swing.JFrame {
         jtfValorDeposito.setEnabled(false);
         jtfMeses.setEnabled(false);
         jtfValorDepositar.setEnabled(false);
+        
+        setLocationRelativeTo(null);
     }
     
     public Boolean existeDadosTemporarios(){

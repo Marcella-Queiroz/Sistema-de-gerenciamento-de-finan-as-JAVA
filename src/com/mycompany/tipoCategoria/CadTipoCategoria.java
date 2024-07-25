@@ -31,6 +31,7 @@ public class CadTipoCategoria extends javax.swing.JFrame {
         
         DaoTipoCategoria daoTipoCategoria = new DaoTipoCategoria();
         
+        setLocationRelativeTo(null);
         jtfTextFieldID.setEnabled(false);
         
     }

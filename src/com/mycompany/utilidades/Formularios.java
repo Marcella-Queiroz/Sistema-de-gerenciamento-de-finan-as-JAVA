@@ -26,5 +26,8 @@ public class Formularios {
     public static JFrame cadCategoria;
     public static JFrame listCategoria;
     
+    //Dar Baixa
     public static JFrame Dar_Baixa;
+    public static JFrame CadBaixa;
+
 }

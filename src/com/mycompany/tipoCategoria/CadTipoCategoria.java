@@ -75,7 +75,7 @@ public class CadTipoCategoria extends javax.swing.JFrame {
             jtfTextFieldID.setText("");
             jtfTipoCategoria.setText("");
         }else{
-            JOptionPane.showMessageDialog(null, "Não foi possível alterar a categoria!");
+            JOptionPane.showMessageDialog(null, "Não foi possível alterar o tipo de categoria!");
         }
         
         ((ListTipoCategoria) Formularios.listTipoCategoria).listarTodos();
@@ -88,12 +88,12 @@ public class CadTipoCategoria extends javax.swing.JFrame {
         DaoTipoCategoria daoTipoCategoria = new DaoTipoCategoria();
         
         if (daoTipoCategoria.excluir(Integer.parseInt(jtfTextFieldID.getText()))){
-            JOptionPane.showMessageDialog(null, "Categoria " + jtfTipoCategoria.getText() + " excluída com sucesso!");
+            JOptionPane.showMessageDialog(null, "Tipo de categoria " + jtfTipoCategoria.getText() + " excluída com sucesso!");
             
             jtfTextFieldID.setText("");
             jtfTipoCategoria.setText("");
         }else{
-            JOptionPane.showMessageDialog(null, "Não foi possível excluir a categoria!");
+            JOptionPane.showMessageDialog(null, "Não foi possível excluir o tipo de categoria!");
         }
         
         ((ListTipoCategoria) Formularios.listTipoCategoria).listarTodos();
@@ -114,6 +114,7 @@ public class CadTipoCategoria extends javax.swing.JFrame {
         btnButtonExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Tipo Categoria");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -203,7 +204,7 @@ public class CadTipoCategoria extends javax.swing.JFrame {
         int escolha = 
                 JOptionPane.showConfirmDialog(
                         null, 
-                        "Deseja realmente excluir a categoria " + jtfTipoCategoria.getText() + "?");
+                        "Deseja realmente excluir o tipo de categoria " + jtfTipoCategoria.getText() + "?");
         
         if(escolha == JOptionPane.YES_OPTION)
             excluir();

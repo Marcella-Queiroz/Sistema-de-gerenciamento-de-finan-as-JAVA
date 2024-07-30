@@ -114,6 +114,7 @@ public class ListReceitas extends javax.swing.JFrame {
         tableReceitas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Listagem de Receita");
 
         jtfFiltrar1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "ID", "Nome" }));
 

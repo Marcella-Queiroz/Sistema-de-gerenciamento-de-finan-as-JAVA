@@ -211,7 +211,7 @@ public class ListMetas extends javax.swing.JFrame {
 
     private void TableMetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMetasMouseClicked
 
-        if (evt.getClickCount() == 2) { // Verifica se foi clicado com o botão direito
+        if (evt.getClickCount() == 2) {
             int row = TableMetas.rowAtPoint(evt.getPoint());
             if (row >= 0 && row < TableMetas.getRowCount()) {
                 TableMetas.setRowSelectionInterval(row, row); // Seleciona a linha clicada
@@ -276,9 +276,9 @@ public class ListMetas extends javax.swing.JFrame {
         DadosTemporarios.tempObject = (ModResumoMetas) modResumoMetas;
 
         if(Formularios.resumoMetas == null){
-            Formularios.resumoMetas = new ResumoMetas();
+            Formularios.resumoMetas = new resumoMetas();
 
-            ((ResumoMetas)Formularios.resumoMetas).existeDadosTemporarios();   
+            ((resumoMetas)Formularios.resumoMetas).existeDadosTemporarios();   
             Formularios.resumoMetas.setVisible(true); 
             Formularios.resumoMetas.setExtendedState(JFrame.NORMAL);
         }

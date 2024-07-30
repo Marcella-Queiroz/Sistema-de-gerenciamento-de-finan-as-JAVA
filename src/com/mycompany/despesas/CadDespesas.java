@@ -1,5 +1,4 @@
 package com.mycompany.despesas;
-
 import com.mycompany.dao.DaoTipo_Categoria;
 import com.mycompany.dao.DaoDespesas;
 import com.mycompany.modelo.ModDespesas;
@@ -7,7 +6,6 @@ import com.mycompany.utilidades.Constantes;
 import com.mycompany.utilidades.DadosTemporarios;
 import com.mycompany.utilidades.Formularios;
 import com.mycompany.utilidades.MyFormatter;
-import com.mysql.cj.protocol.Resultset;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import sisgerenciamentocontas.MyConfirmDialog;
@@ -48,6 +46,7 @@ public class CadDespesas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         jtfIdCategoria.setVisible(false);
     }
+    
     
     public Boolean existeDadosTemporarios(){
         if (DadosTemporarios.tempObject instanceof ModDespesas){

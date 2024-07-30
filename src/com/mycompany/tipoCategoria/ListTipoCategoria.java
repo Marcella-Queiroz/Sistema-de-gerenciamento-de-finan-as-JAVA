@@ -103,6 +103,7 @@ public class ListTipoCategoria extends javax.swing.JFrame {
         jtfLabelRegistro1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Listagem de Tipo Categoria");
 
         tableTipoCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

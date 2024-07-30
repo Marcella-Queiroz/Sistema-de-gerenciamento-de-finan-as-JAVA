@@ -5,9 +5,13 @@
 package com.mycompany.Dar_Baixa;
 
 import com.mycompany.dao.DaoDespesas;
+import com.mycompany.despesas.CadDespesas;
+import com.mycompany.modelo.ModDespesas;
+import com.mycompany.utilidades.DadosTemporarios;
 import com.mycompany.utilidades.Formularios;
 import com.mycompany.utilidades.MyFormatter;
 import java.sql.ResultSet;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -177,6 +181,11 @@ public class Dar_Baixa extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        TableDar_Baixa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableDar_BaixaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TableDar_Baixa);
 
         jButton1.setText("Buscar");
@@ -242,6 +251,27 @@ public class Dar_Baixa extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         Formularios.Dar_Baixa = null;
     }//GEN-LAST:event_formWindowClosed
+
+    private void TableDar_BaixaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableDar_BaixaMouseClicked
+       if(evt.getClickCount() == 2){
+           ModDespesas modDespesas = new ModDespesas();
+           
+            modDespesas.setId(Integer.parseInt(String.valueOf(TableDar_Baixa.getValueAt(TableDar_Baixa.getSelectedRow(), 0))));
+            modDespesas.setCategoriaId(Integer.parseInt(String.valueOf(TableDar_Baixa.getValueAt(TableDar_Baixa.getSelectedRow(), 1))));
+            modDespesas.setNome(String.valueOf(TableDar_Baixa.getValueAt(TableDar_Baixa.getSelectedRow(), 2)));
+            modDespesas.setValor(Float.parseFloat(String.valueOf(TableDar_Baixa.getValueAt(TableDar_Baixa.getSelectedRow(), 3))));
+           
+            DadosTemporarios.tempObject = (ModDespesas) modDespesas;
+            
+            if(Formularios.cadDespesas == null){
+                Formularios.cadDespesas = new CadDespesas();
+                
+            ((CadDespesas)Formularios.cadDespesas).existeDadosTemporarios();
+                Formularios.cadDespesas.setVisible(true);
+                Formularios.cadDespesas.setExtendedState(JFrame.NORMAL);
+            }
+       }
+    }//GEN-LAST:event_TableDar_BaixaMouseClicked
 
     /**
      * @param args the command line arguments
